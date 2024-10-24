@@ -1,0 +1,103 @@
+{
+    "author": "Ty Eggen",
+    "description": "",
+    "devDependencies": {
+        "eslint": "^9.12.0",
+        "git-cz": "^4.9.0",
+        "prettier": "^3.3.3",
+        "tsup": "^8.3.0",
+        "typescript": "^5.6.3",
+        "wireit": "^0.14.9"
+    },
+    "exports": {
+        ".": {
+            "import": "./dist/config.mjs",
+            "require": "./dist/config.cjs",
+            "types": "./dist/config.d.ts"
+        }
+    },
+    "keywords": [],
+    "license": "ISC",
+    "name": "@tyisi/config-changelog",
+    "peerDependencies": {
+        "git-cz": "^4.9.0"
+    },
+    "repository": "https://github.com/TyIsI/configs.git",
+    "scripts": {
+        "build": "wireit",
+        "build:cjs": "wireit",
+        "build:dts": "wireit",
+        "build:esm": "wireit",
+        "commit": "npx git-cz@latest --scope=changelog",
+        "lint": "wireit",
+        "type-check": "wireit"
+    },
+    "version": "0.0.0",
+    "wireit": {
+        "build": {
+            "dependencies": [
+                "build:cjs",
+                "build:dts",
+                "build:esm",
+                "type-check"
+            ]
+        },
+        "build:cjs": {
+            "clean": true,
+            "command": "tsup --cjsInterop --format cjs",
+            "dependencies": [
+                "type-check"
+            ],
+            "files": [
+                "src/config.ts"
+            ],
+            "output": [
+                "dist/*.cjs"
+            ]
+        },
+        "build:dts": {
+            "clean": true,
+            "command": "tsup --cjsInterop --dts-only",
+            "dependencies": [
+                "type-check"
+            ],
+            "files": [
+                "src/*.ts"
+            ],
+            "output": [
+                "dist/config.d.ts"
+            ]
+        },
+        "build:esm": {
+            "clean": true,
+            "command": "tsup --format esm",
+            "dependencies": [
+                "type-check"
+            ],
+            "files": [
+                "src/config.ts"
+            ],
+            "output": [
+                "dist/config.mjs"
+            ]
+        },
+        "lint": {
+            "dependencies": [
+                "lint:code",
+                "lint:format"
+            ]
+        },
+        "lint:code": {
+            "command": "eslint --fix src/"
+        },
+        "lint:format": {
+            "command": "prettier -w .",
+            "dependencies": [
+                "lint:code"
+            ]
+        },
+        "type-check": {
+            "command": "tsc --noEmit"
+        }
+    }
+}
