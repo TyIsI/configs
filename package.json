@@ -18,6 +18,7 @@
     "repository": "https://github.com/TyIsI/configs.git",
     "scripts": {
         "build": "wireit",
+        "changeset": "changeset",
         "commit": "npx git-cz@latest",
         "lint": "wireit"
     },
