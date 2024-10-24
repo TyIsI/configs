@@ -6,6 +6,13 @@
         { "name": "prettier", "path": "./packages/prettier" },
         { "name": "stylelint", "path": "./packages/stylelint" }
     ],
+    "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "[shellscript]": {
+            "editor.defaultFormatter": "esbenp.prettier-vscode",
+            "files.eol": "\n"
+        }
+    },
     "extensions": {
         "recommendations": [
             "esbenp.prettier-vscode",
