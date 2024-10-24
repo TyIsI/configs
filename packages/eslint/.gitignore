@@ -1,0 +1,15 @@
+*
+!.gitignore
+
+!src/
+!src/**/
+!src/**/*
+
+!types/
+!types/**/
+!types/**/*
+
+!package.json
+!tsconfig.json
+!tsconfig.*.json
+!tsup.config.ts

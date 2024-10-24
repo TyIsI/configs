@@ -1,0 +1,101 @@
+{
+    "author": "Ty Eggen",
+    "dependencies": {
+        "@eslint/js": "^9.12.0",
+        "eslint-config-love": "^87.0.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-import": "^2.31.0",
+        "eslint-plugin-jsx-a11y": "^6.10.0",
+        "eslint-plugin-react": "^7.37.1",
+        "globals": "^15.11.0"
+    },
+    "description": "",
+    "devDependencies": {
+        "@types/eslint-config-prettier": "^6.11.3",
+        "@types/eslint-plugin-jsx-a11y": "^6.9.0",
+        "@types/eslint__js": "^8.42.3",
+        "@typescript-eslint/utils": "^8.11.0",
+        "eslint": "^9.12.0",
+        "eslint-import-resolver-typescript": "^3.6.3",
+        "prettier": "^3.3.3",
+        "tsup": "^8.3.0",
+        "typescript": "^5.6.3",
+        "wireit": "^0.14.9"
+    },
+    "exports": {
+        ".": {
+            "import": "./dist/config.mjs",
+            "require": "./dist/config.cjs"
+        }
+    },
+    "keywords": [],
+    "license": "ISC",
+    "name": "@tyisi/config-eslint",
+    "peerDependencies": {
+        "eslint": "^9.12.0",
+        "prettier": "^3.3.3"
+    },
+    "repository": "https://github.com/TyIsI/configs.git",
+    "scripts": {
+        "build": "wireit",
+        "build:cjs": "wireit",
+        "build:esm": "wireit",
+        "commit": "npx git-cz@latest --scope=eslint",
+        "lint": "wireit",
+        "type-check": "wireit"
+    },
+    "version": "0.0.0",
+    "wireit": {
+        "build": {
+            "dependencies": [
+                "build:cjs",
+                "build:esm",
+                "type-check"
+            ]
+        },
+        "build:cjs": {
+            "clean": true,
+            "command": "tsup --cjsInterop --format cjs",
+            "dependencies": [
+                "type-check"
+            ],
+            "files": [
+                "src/config.ts"
+            ],
+            "output": [
+                "dist/config.cjs"
+            ]
+        },
+        "build:esm": {
+            "clean": true,
+            "command": "tsup --format esm",
+            "dependencies": [
+                "type-check"
+            ],
+            "files": [
+                "src/config.ts"
+            ],
+            "output": [
+                "dist/config.mjs"
+            ]
+        },
+        "lint": {
+            "dependencies": [
+                "lint:code",
+                "lint:format"
+            ]
+        },
+        "lint:code": {
+            "command": "eslint --fix src/ types/"
+        },
+        "lint:format": {
+            "command": "prettier -w .",
+            "dependencies": [
+                "lint:code"
+            ]
+        },
+        "type-check": {
+            "command": "tsc --noEmit"
+        }
+    }
+}
