@@ -1,0 +1,48 @@
+{
+    "author": "Ty Eggen",
+    "description": "",
+    "devDependencies": {
+        "@changesets/changelog-git": "^0.2.0",
+        "@changesets/cli": "^2.27.9",
+        "@tyisi/config-changelog": "workspace:*",
+        "@tyisi/config-eslint": "workspace:*",
+        "@tyisi/config-prettier": "workspace:*",
+        "typescript": "^5.6.3",
+        "wireit": "^0.14.9"
+    },
+    "keywords": [],
+    "license": "ISC",
+    "name": "@tyisi/configs",
+    "prettier": "@tyisi/config-prettier",
+    "private": true,
+    "repository": "https://github.com/TyIsI/configs.git",
+    "scripts": {
+        "build": "wireit",
+        "commit": "npx git-cz@latest",
+        "lint": "wireit"
+    },
+    "type": "module",
+    "version": "0.0.0",
+    "wireit": {
+        "build": {
+            "dependencies": [
+                "./packages/changelog:build",
+                "./packages/eslint:build",
+                "./packages/prettier:build",
+                "./packages/stylelint:build"
+            ]
+        },
+        "lint": {
+            "dependencies": [
+                "lint:local",
+                "./packages/changelog:lint",
+                "./packages/eslint:lint",
+                "./packages/prettier:lint",
+                "./packages/stylelint:lint"
+            ]
+        },
+        "lint:local": {
+            "command": "prettier -w ."
+        }
+    }
+}

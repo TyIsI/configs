@@ -1,0 +1,16 @@
+{
+    "folders": [
+        { "name": "project", "path": "." },
+        { "name": "changelog", "path": "./packages/changelog" },
+        { "name": "eslint", "path": "./packages/eslint" },
+        { "name": "prettier", "path": "./packages/prettier" },
+        { "name": "stylelint", "path": "./packages/stylelint" }
+    ],
+    "extensions": {
+        "recommendations": [
+            "esbenp.prettier-vscode",
+            "dbaeumer.vscode-eslint",
+            "google.wireit"
+        ]
+    }
+}
