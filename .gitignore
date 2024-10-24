@@ -15,6 +15,12 @@
 !.github/**/
 !.github/**/*.yml
 
+!docs/
+!docs/*.md
+
+!tools/
+!tools/*.sh
+
 !.editorconfig
 !changelog.config.cjs
 !configs.code-workspace
@@ -22,3 +28,5 @@
 
 !tsconfig.*.json
 !tsconfig.json
+
+!README.md

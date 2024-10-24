@@ -9,7 +9,7 @@
         "eslint-plugin-react": "^7.37.1",
         "globals": "^15.11.0"
     },
-    "description": "",
+    "description": "various eslint configs",
     "devDependencies": {
         "@types/eslint-config-prettier": "^6.11.3",
         "@types/eslint-plugin-jsx-a11y": "^6.9.0",

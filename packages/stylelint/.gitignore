@@ -9,3 +9,5 @@
 !tsconfig.json
 !tsconfig.*.json
 !tsup.config.ts
+
+!README.md

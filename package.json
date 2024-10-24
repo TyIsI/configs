@@ -1,6 +1,6 @@
 {
     "author": "Ty Eggen",
-    "description": "",
+    "description": "A collection of my most commonly used configurations",
     "devDependencies": {
         "@changesets/changelog-git": "^0.2.0",
         "@changesets/cli": "^2.27.9",
@@ -32,6 +32,9 @@
                 "./packages/prettier:build",
                 "./packages/stylelint:build"
             ]
+        },
+        "build:readme": {
+            "command": "tools/generate-project-readme.sh"
         },
         "lint": {
             "dependencies": [

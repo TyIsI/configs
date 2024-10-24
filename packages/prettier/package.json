@@ -4,7 +4,7 @@
         "prettier-plugin-sh": "^0.14.0",
         "prettier-plugin-tailwindcss": "^0.6.8"
     },
-    "description": "",
+    "description": "standard prettier config",
     "devDependencies": {
         "eslint": "^9.12.0",
         "prettier": "^3.3.3",
