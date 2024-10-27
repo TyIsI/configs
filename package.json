@@ -19,7 +19,7 @@
     "scripts": {
         "build": "wireit",
         "changeset": "changeset",
-        "ci:publish": "pnpm publish -r",
+        "ci:publish": "pnpm publish -r --access public",
         "commit": "npx git-cz@latest",
         "lint": "wireit"
     },
