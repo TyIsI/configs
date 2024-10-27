@@ -23,11 +23,12 @@
         "typescript": "^5.6.3",
         "wireit": "^0.14.9"
     },
+    "main": "./dist/config.cjs",
+    "types": "./dist/config.d.cts",
     "exports": {
-        ".": {
-            "import": "./dist/config.mjs",
-            "require": "./dist/config.cjs"
-        }
+        "require": "./dist/config.cjs",
+        "types": "./dist/config.d.mts",
+        "import": "./dist/config.mjs"
     },
     "files": [
         "./dist"
