@@ -16,7 +16,9 @@ jobs:
         runs-on: ubuntu-latest
 
         permissions:
+            actions: write
             contents: write
+            pull-requests: write
 
         steps:
             - name: checkout code repository
