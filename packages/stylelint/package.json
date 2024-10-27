@@ -22,6 +22,9 @@
             "require": "./dist/config.cjs"
         }
     },
+    "files": [
+        "./dist"
+    ],
     "keywords": [],
     "license": "ISC",
     "name": "@tyisi/config-stylelint",

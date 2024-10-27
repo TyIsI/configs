@@ -16,6 +16,9 @@
             "types": "./dist/config.d.ts"
         }
     },
+    "files": [
+        "./dist"
+    ],
     "keywords": [],
     "license": "ISC",
     "name": "@tyisi/config-changelog",
