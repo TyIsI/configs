@@ -4,6 +4,7 @@
         "@eslint/js": "^9.12.0",
         "eslint-config-love": "^87.0.0",
         "eslint-config-prettier": "^9.1.0",
+        "eslint-import-resolver-typescript": "^3.6.3",
         "eslint-plugin-import": "^2.31.0",
         "eslint-plugin-jsx-a11y": "^6.10.0",
         "eslint-plugin-react": "^7.37.1",
@@ -41,6 +42,7 @@
     "repository": "https://github.com/TyIsI/configs.git",
     "scripts": {
         "build": "wireit",
+        "build:check": "wireit",
         "build:cjs": "wireit",
         "build:esm": "wireit",
         "commit": "npx git-cz@latest --scope=eslint",
@@ -53,12 +55,21 @@
             "dependencies": [
                 "build:cjs",
                 "build:esm",
-                "type-check"
+                "type-check",
+                "build:check"
             ]
+        },
+        "build:check": {
+            "dependencies": [
+                "build:cjs",
+                "build:esm",
+                "type-check"
+            ],
+            "command": "pnpm dlx @arethetypeswrong/cli@latest --pack ."
         },
         "build:cjs": {
             "clean": true,
-            "command": "tsup --cjsInterop --format cjs",
+            "command": "tsup --cjsInterop --format cjs --dts",
             "dependencies": [
                 "type-check"
             ],
@@ -71,7 +82,7 @@
         },
         "build:esm": {
             "clean": true,
-            "command": "tsup --format esm",
+            "command": "tsup --format esm --dts",
             "dependencies": [
                 "type-check"
             ],
