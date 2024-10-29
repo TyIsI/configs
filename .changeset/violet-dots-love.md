@@ -1,5 +1,5 @@
 ---
-'@tyisi/config-eslint': minor
+'@tyisi/config-eslint': major
 ---
 
-corrected error with eslint dependency
+release: 2.0.0 - R E F A C T O R - E V E R Y T H I N G

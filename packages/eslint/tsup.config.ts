@@ -1,21 +1,28 @@
 import { defineConfig, type Options } from 'tsup'
 
-const getExt: Options['outExtension'] = ({ format }) => {
-    let ext = 'js'
+const buildEnv = process.env.NODE_ENV ?? 'development'
 
-    if (format === 'cjs') ext = 'cjs'
-    if (format === 'esm') ext = 'mjs'
-
-    return { js: `.${ext}` }
+const getExt: Options['outExtension'] = () => {
+    return { js: `.mjs` }
 }
 
 const options: Options = {
-    entry: ['./src/config.ts'],
-    splitting: true,
+    entry: {
+        index: './src/index.ts',
+        combined: './src/combined.ts',
+        js: './src/js.ts',
+        jsx: './src/jsx.ts',
+        ts: './src/ts.ts',
+        tsx: './src/tsx.ts'
+    },
+    outDir: './dist',
+    splitting: false,
     sourcemap: false,
+    clean: false,
     dts: false,
-    outExtension: getExt,
-    cjsInterop: true
+    shims: true,
+    minify: buildEnv === 'production',
+    outExtension: getExt
 }
 
 export default defineConfig(options)

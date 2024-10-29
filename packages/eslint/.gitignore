@@ -9,6 +9,12 @@
 !types/**/
 !types/**/*
 
+!test-configs/
+!test-configs/eslint.config.*
+
+!tools/
+!tools/*
+
 !package.json
 !tsconfig.json
 !tsconfig.*.json

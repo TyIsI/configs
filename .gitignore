@@ -24,7 +24,7 @@
 !.editorconfig
 !changelog.config.cjs
 !configs.code-workspace
-!eslint.config.js
+!eslint.config.mjs
 !.prettierignore
 
 !tsconfig.*.json

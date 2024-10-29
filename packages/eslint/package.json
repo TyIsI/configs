@@ -15,6 +15,7 @@
         "@types/eslint-config-prettier": "^6.11.3",
         "@types/eslint-plugin-jsx-a11y": "^6.9.0",
         "@types/eslint__js": "^8.42.3",
+        "@types/node": "^20.0.0",
         "@typescript-eslint/utils": "^8.11.0",
         "eslint": "^9.12.0",
         "eslint-import-resolver-typescript": "^3.6.3",
@@ -23,12 +24,37 @@
         "typescript": "^5.6.3",
         "wireit": "^0.14.9"
     },
-    "main": "./dist/config.cjs",
-    "types": "./dist/config.d.cts",
+    "engines": {
+        "node": ">=20"
+    },
+    "type": "module",
+    "main": "./dist/index.mjs",
+    "types": "./dist/index.d.mts",
     "exports": {
-        "require": "./dist/config.cjs",
-        "types": "./dist/config.d.mts",
-        "import": "./dist/config.mjs"
+        ".": {
+            "import": "./dist/index.mjs",
+            "types": "./dist/index.d.mts"
+        },
+        "./combined": {
+            "import": "./dist/combined.mjs",
+            "types": "./dist/combined.d.mts"
+        },
+        "./js": {
+            "import": "./dist/js.mjs",
+            "types": "./dist/js.d.mts"
+        },
+        "./jsx": {
+            "import": "./dist/jsx.mjs",
+            "types": "./dist/jsx.d.mts"
+        },
+        "./ts": {
+            "import": "./dist/ts.mjs",
+            "types": "./dist/ts.d.mts"
+        },
+        "./tsx": {
+            "import": "./dist/tsx.mjs",
+            "types": "./dist/tsx.d.mts"
+        }
     },
     "files": [
         "./dist"
@@ -44,8 +70,7 @@
     "scripts": {
         "build": "wireit",
         "build:check": "wireit",
-        "build:cjs": "wireit",
-        "build:esm": "wireit",
+        "build:src": "wireit",
         "commit": "npx git-cz@latest --scope=eslint",
         "lint": "wireit",
         "type-check": "wireit"
@@ -54,44 +79,41 @@
     "wireit": {
         "build": {
             "dependencies": [
-                "build:cjs",
-                "build:esm",
                 "type-check",
+                "build:src",
                 "build:check"
             ]
         },
         "build:check": {
             "dependencies": [
-                "build:cjs",
-                "build:esm",
-                "type-check"
-            ],
-            "command": "pnpm dlx @arethetypeswrong/cli@latest --pack ."
-        },
-        "build:cjs": {
-            "clean": true,
-            "command": "tsup --cjsInterop --format cjs --dts",
-            "dependencies": [
-                "type-check"
-            ],
-            "files": [
-                "src/config.ts"
-            ],
-            "output": [
-                "dist/config.cjs"
+                "build:src",
+                "build:check:mjs"
             ]
         },
-        "build:esm": {
+        "build:check:mjs": {
+            "dependencies": [
+                "build:src"
+            ],
+            "command": "eslint -c test-configs/eslint.config.mjs src"
+        },
+        "build:src": {
+            "dependencies": [
+                "type-check",
+                "build:src:esm"
+            ],
+            "command": "tools/fix-dist-extensions.sh"
+        },
+        "build:src:esm": {
             "clean": true,
-            "command": "tsup --format esm --dts",
+            "command": "tsup --format esm --outDir dist/ && tsup  --format esm --outDir dist/ --dts-only",
             "dependencies": [
                 "type-check"
             ],
             "files": [
-                "src/config.ts"
+                "src/index.ts"
             ],
             "output": [
-                "dist/config.mjs"
+                "dist/"
             ]
         },
         "lint": {
