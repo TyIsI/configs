@@ -11,6 +11,18 @@
         "[shellscript]": {
             "editor.defaultFormatter": "esbenp.prettier-vscode",
             "files.eol": "\n"
+        },
+        "[typescript]": {
+            "editor.defaultFormatter": "esbenp.prettier-vscode",
+            "editor.codeActionsOnSave": {
+                "source.addMissingImports.ts": "always",
+                "source.fixAll.eslint": "always",
+                "source.fixAll.shellcheck": "always",
+                "source.fixAll.ts": "always",
+                "source.organizeImports": "always",
+                "source.organizeLinkDefinitions": "always",
+                "source.sortImports": "always"
+            }
         }
     },
     "extensions": {

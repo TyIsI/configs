@@ -87,14 +87,20 @@
         "build:check": {
             "dependencies": [
                 "build:src",
-                "build:check:mjs"
+                "build:check:eslint:js"
             ]
         },
-        "build:check:mjs": {
+        "build:check:eslint:js": {
             "dependencies": [
                 "build:src"
             ],
-            "command": "eslint -c test-configs/eslint.config.mjs src"
+            "command": "eslint -c test-configs/eslint.config.cjs.mjs tests/cjs/*.cjs"
+        },
+        "build:check:eslint:ts": {
+            "dependencies": [
+                "build:src"
+            ],
+            "command": "eslint -c test-configs/eslint.config.ts.mjs tests/ts/*.ts"
         },
         "build:src": {
             "dependencies": [

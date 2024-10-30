@@ -22,9 +22,9 @@
         "src/**/*.ts",
         "types/**/*.cts",
         "types/**/*.ts",
-        "types/**/*.mts",
-        "src/lib/types.ts"
+        "types/**/*.mts"
     ],
+    "exclude": ["node_modules"],
     "references": [
         {
             "path": "tsconfig.node.json"

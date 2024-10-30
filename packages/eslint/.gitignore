@@ -12,6 +12,10 @@
 !test-configs/
 !test-configs/eslint.config.*
 
+!tests/
+!tests/**/
+!tests/**/*
+
 !tools/
 !tools/*
 

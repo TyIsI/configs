@@ -9,11 +9,19 @@ const getExt: Options['outExtension'] = () => {
 const options: Options = {
     entry: {
         index: './src/index.ts',
-        combined: './src/combined.ts',
-        js: './src/js.ts',
-        jsx: './src/jsx.ts',
-        ts: './src/ts.ts',
-        tsx: './src/tsx.ts'
+        cjs: './src/configs/cjs.ts',
+        cjsx: './src/configs/cjsx.ts',
+        combined: './src/configs/combined.ts',
+        cts: './src/configs/cts.ts',
+        ctsx: './src/configs/ctsx.ts',
+        js: './src/configs/js.ts',
+        jsx: './src/configs/jsx.ts',
+        mjs: './src/configs/mjs.ts',
+        mjsx: './src/configs/mjsx.ts',
+        mts: './src/configs/mts.ts',
+        mtsx: './src/configs/mtsx.ts',
+        ts: './src/configs/ts.ts',
+        tsx: './src/configs/tsx.ts'
     },
     outDir: './dist',
     splitting: false,

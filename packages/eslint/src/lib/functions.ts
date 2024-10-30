@@ -1,123 +1,73 @@
-import type { Linter } from 'eslint'
-import {
-    baseConfigs,
-    endConfigs,
-    fileGlobs,
-    ValidRuleTypes
-} from './constants.js'
-import type { FileTypes, ConfigTypes, RuleType, RuleSets } from './types.js'
+import type {
+    ConfigType,
+    ConfigTypeKeys,
+    ConfigTypes,
+    FileTypes,
+    RuleType
+} from './types.js'
+
+import { fileGlobs, ValidRuleTypes } from './constants.js'
 
 export const generateFlatConfig = (
     globName: FileTypes,
-    ...configs: Linter.Config[]
-): Linter.Config[] => {
+    ...configs: ConfigTypes
+): ConfigTypes => {
     if (typeof globName !== 'string')
         throw new Error(`globName is not string: ${typeof globName}`)
 
-    return [...baseConfigs, ...configs, ...endConfigs]
-}
-
-export const hydrateConfigSlice = (
-    ...configItems: ConfigTypes
-): Linter.Config => {
-    return configItems.reduce((c, o) => {
-        if ('files' in o) {
-            c.files =
-                'files' in c
-                    ? [...new Set([...(c.files ?? []), ...(o.files ?? [])])]
-                    : (c.files = o.files)
-        }
-
-        if ('ignores' in o) {
-            c.ignores =
-                'ignores' in c
-                    ? [...new Set([...(c.ignores ?? []), ...(o.ignores ?? [])])]
-                    : (c.ignores = o.ignores)
-        }
-
-        if ('language' in o) {
-            // @ts-expect-error non existent
-            c.language = o.language
-        }
-
-        if ('languageOptions' in o)
-            c.languageOptions = {
-                ...(c.languageOptions ?? {}),
-                ...o.languageOptions
-            }
-
-        if ('linterOptions' in o)
-            c.linterOptions = {
-                ...(c.linterOptions ?? {}),
-                ...o.linterOptions
-            }
-
-        if ('plugins' in o)
-            c.plugins = {
-                ...(c.plugins ?? {}),
-                ...o.plugins
-            }
-
-        if ('processor' in o) c.processor = o.processor
-
-        if ('rules' in o)
-            c.rules = {
-                ...(c.rules ?? {}),
-                ...o.rules
-            }
-
-        if ('settings' in o)
-            c.settings = {
-                ...(c.settings ?? {}),
-                ...o.settings
-            }
+    return configs.map((c) => {
+        if (c.files == null) c.files = fileGlobs[globName]
+        else if (Array.isArray(c.files))
+            c.files = [...new Set([...c.files, ...fileGlobs[globName]])]
 
         return c
-    }, {}) as Linter.Config
+    })
 }
 
-export const coerceConfigName = (
-    configName: string,
-    ...configItems: ConfigTypes
-): Linter.Config => {
-    if (!Array.isArray(configItems))
-        throw new Error(`configItem is not a valid object`)
+export const hydrateConfigSlice = (...configItems: ConfigTypes): ConfigType => {
+    return configItems.reduce((collection, item) => {
+        for (const propKey of Object.keys(item) as ConfigTypeKeys) {
+            if (
+                propKey in collection &&
+                Array.isArray(collection[propKey]) &&
+                Array.isArray(item[propKey])
+            ) {
+                // @ts-expect-error mismatch
+                collection[propKey] = [
+                    ...new Set([...collection[propKey], ...item[propKey]])
+                ]
+            } else if (
+                propKey in collection &&
+                collection[propKey] != null &&
+                typeof collection[propKey] === 'object' &&
+                item[propKey] != null &&
+                typeof item[propKey] === 'object'
+            ) {
+                // @ts-expect-error mismatch
+                collection[propKey] = {
+                    ...collection[propKey],
+                    ...item[propKey]
+                }
+            } else {
+                // @ts-expect-error mismatch
+                collection[propKey] = item[propKey]
+            }
+        }
 
-    const configItem = hydrateConfigSlice(...configItems)
-
-    return !('name' in configItem)
-        ? (Object.assign({}, configItem, {
-              name: configName
-          }) as Linter.Config)
-        : configItem
+        return collection
+    }, {})
 }
 
 export const isRulesetType = (name?: unknown): name is RuleType => {
     return ValidRuleTypes.includes(name as RuleType)
 }
 
-export const hoistRuleset = (
-    name: string,
-    rules: RuleSets,
-    ...rulesets: Array<Linter.Config['rules']>
-): void => {
-    if (!isRulesetType(name)) throw new Error('Invalid ruleset')
-
-    if (rules[name] != null) throw new Error('Ruleset already exists')
-
-    const ruleset = rulesets.reduce((c, e) => ({ ...c, ...e }), {})
-
-    rules[name] = ruleset
-}
-
 export const createConfigSlice = (
     name: string,
-    glob: FileTypes,
     ...objs: object[]
-): Linter.Config => {
+): ConfigType => {
     return {
-        name,
-        files: fileGlobs[glob],
-        ...hydrateConfigSlice(...objs)
+        ...hydrateConfigSlice(...objs),
+        name
     }
 }

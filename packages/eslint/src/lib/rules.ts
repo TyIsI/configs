@@ -1,6 +1,3 @@
-import type { Linter, Rule } from 'eslint'
-import { eslintPluginReact } from './externals.js'
-import { hoistRuleset } from './functions.js'
 import type { RuleSets } from './types.js'
 
 export const rules: RuleSets = {
@@ -17,10 +14,10 @@ export const rules: RuleSets = {
                 varsIgnorePattern: '^_'
             }
         ],
+
         'no-magic-numbers': 'off',
-        '@typescript-eslint/no-magic-numbers': 'off'
-    },
-    import: {
+        '@typescript-eslint/no-magic-numbers': 'off',
+
         'import/first': 'error',
         'import/newline-after-import': 'error',
         'import/no-duplicates': 'error',
@@ -109,19 +106,6 @@ export const rules: RuleSets = {
 
                 'pathGroupsExcludedImportTypes': ['react']
             }
-        ],
-
-        'no-unused-vars': [
-            'error',
-            {
-                args: 'all',
-                argsIgnorePattern: '^_',
-                caughtErrors: 'all',
-                caughtErrorsIgnorePattern: '^_',
-                destructuredArrayIgnorePattern: '^_',
-                ignoreRestSiblings: true,
-                varsIgnorePattern: '^_'
-            }
         ]
     },
     commonTS: {
@@ -194,57 +178,26 @@ export const rules: RuleSets = {
                 allowWithName: '(Options|Props)$'
             }
         ]
-    }
-}
-
-hoistRuleset('reactBaseRules', rules, {
-    'jsx-a11y/accessible-emoji': 'off',
-    'jsx-a11y/anchor-is-valid': [
-        'error',
-        {
-            aspects: ['invalidHref', 'preferButton'],
-            components: ['Link'],
-            specialLink: ['hrefLeft', 'hrefRight']
-        }
-    ],
-    'react/prop-types': 'off',
-    'react/react-in-jsx-scope': 'off',
-    'import/no-nodejs-modules': 'warn'
-})
-
-export const recommendedFlatReactPluginsConfig: Linter.Config = {
-    plugins: {
-        react: {
-            rules: eslintPluginReact.rules as Record<string, Rule.RuleModule>
-        }
     },
 
-    // @ts-expect-error non existent
-    languageOptions: eslintPluginReact.configs.flat.recommended.languageOptions,
-
-    // @ts-expect-error non existent
-    rules: eslintPluginReact.configs.flat.recommended.rules
-}
-
-hoistRuleset('react', rules, rules.common, rules.reactBaseRules)
-
-hoistRuleset('ts', rules, rules.common, rules.commonTS)
-
-hoistRuleset('tsx', rules, rules.ts, rules.reactBaseRules)
-
-export const reactVersionSettings = {
-    settings: { react: { version: 'detect' } }
-}
-
-export const tsSettings = {
-    settings: {
-        'import/resolver': {
-            // You will also need to install and configure the TypeScript resolver
-            // See also https://github.com/import-js/eslint-import-resolver-typescript#configuration
-            typescript: true,
-            node: {
-                extensions: ['.ts']
+    reactBaseRules: {
+        'jsx-a11y/accessible-emoji': 'off',
+        'jsx-a11y/anchor-is-valid': [
+            'error',
+            {
+                aspects: ['invalidHref', 'preferButton'],
+                components: ['Link'],
+                specialLink: ['hrefLeft', 'hrefRight']
             }
-        }
+        ],
+        'react/prop-types': 'off',
+        'react/react-in-jsx-scope': 'off',
+        'import/no-nodejs-modules': 'warn'
     }
 }
+
+rules.react = { ...rules.common, ...rules.reactBaseRules }
+
+rules.ts = { ...rules.common, ...rules.commonTS }
+
+rules.tsx = { ...rules.ts, ...rules.reactBaseRules }

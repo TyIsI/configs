@@ -1,12 +1,29 @@
-import type { Linter } from 'eslint'
-
 import type { TSESLint } from '@typescript-eslint/utils'
+import type { Linter } from 'eslint'
 import type { ReactFlatConfig } from 'eslint-plugin-react'
-import type { ValidRuleTypes } from './constants.js'
 
-export type FileTypes = 'js' | 'jsx' | 'ts' | 'tsx'
+export type FileTypes =
+    | 'cjs'
+    | 'cjsx'
+    | 'cts'
+    | 'ctsx'
+    | 'js'
+    | 'jsx'
+    | 'mjs'
+    | 'mjsx'
+    | 'mts'
+    | 'mtsx'
+    | 'ts'
+    | 'tsx'
 
-export type RuleType = (typeof ValidRuleTypes)[number]
+export type RuleType =
+    | 'common'
+    | 'commonTS'
+    | 'import'
+    | 'react'
+    | 'reactBaseRules'
+    | 'ts'
+    | 'tsx'
 
 export interface RuleSets
     extends Partial<Record<RuleType, Linter.Config['rules']>> {}
@@ -33,5 +50,8 @@ export type ConfigType =
     | NamefulReactFlatConfig
     | NamefulConfigLove
     | TSESLint.FlatConfig.Config
+
+export type ConfigTypeKey = keyof ConfigType
+export type ConfigTypeKeys = ConfigTypeKey[]
 
 export type ConfigTypes = ConfigType[]

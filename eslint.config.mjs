@@ -1,3 +1,3 @@
-import ts from '@tyisi/config-eslint/ts'
+import { js, ts } from '@tyisi/config-eslint'
 
-export default ts
+export default [...js, ...ts]

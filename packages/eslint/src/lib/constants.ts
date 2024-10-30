@@ -1,10 +1,17 @@
-import { eslintConfigPrettier } from './externals.js'
-import type { FileTypes } from './types.js'
+import type { ConfigTypes, FileTypes } from './types.js'
 
 export const fileGlobs: Record<FileTypes, string[]> = {
-    js: ['**/*.js', '**/*.cjs', '**/*.mjs'],
+    cjs: ['**/*.cjs'],
+    cjsx: ['**/*.cjsx'],
+    cts: ['**/*.cts'],
+    ctsx: ['**/*.ctsx'],
+    js: ['**/*.js'],
     jsx: ['**/*.jsx'],
-    ts: ['**/*.ts', '**/*.cts', '**/*.mts'],
+    mjs: ['**/*.mjs'],
+    mjsx: ['**/*.mjsx'],
+    mts: ['**/*.mts'],
+    mtsx: ['**/*.mtsx'],
+    ts: ['**/*.ts'],
     tsx: ['**/*.tsx']
 }
 
@@ -18,12 +25,10 @@ export const ValidRuleTypes = [
     'tsx'
 ] as const
 
-export const baseConfigs = [
+export const baseConfigs: ConfigTypes = [
     {
         name: '@tyisi/config-eslint/baseConfig/ignores',
 
         ignores: ['**/node_modules/', '**/build/', '**/dist/', '**/env.d.ts']
     }
 ]
-
-export const endConfigs = [eslintConfigPrettier]
