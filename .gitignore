@@ -30,4 +30,5 @@
 !tsconfig.*.json
 !tsconfig.json
 
+!CHANGELOG.md
 !README.md

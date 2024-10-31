@@ -24,4 +24,5 @@
 !tsconfig.*.json
 !tsup.config.ts
 
+!CHANGELOG.md
 !README.md
