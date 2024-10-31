@@ -6,6 +6,7 @@
 !src/**/*
 
 !package.json
+!stylelint.config.cjs
 !tsconfig.json
 !tsconfig.*.json
 !tsup.config.ts

@@ -10,7 +10,7 @@ const getExt: Options['outExtension'] = ({ format }) => {
 }
 
 const options: Options = {
-    entry: ['./src/config.ts'],
+    entry: ['./src/index.ts'],
     splitting: true,
     sourcemap: false,
     dts: false,

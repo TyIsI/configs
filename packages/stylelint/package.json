@@ -3,23 +3,32 @@
     "dependencies": {
         "stylelint-config-clean-order": "^6.1.0",
         "stylelint-config-css-modules": "^4.4.0",
-        "stylelint-config-prettier": "^9.0.5",
         "stylelint-config-property-sort-order-smacss": "^10.0.0",
-        "stylelint-config-standard": "^36.0.1",
-        "stylelint-config-standard-scss": "^13.1.0"
+        "stylelint-config-standard-scss": "^13.1.0",
+        "stylelint-order": "^6.0.4",
+        "stylelint-prettier": "^5.0.2"
     },
     "description": "my standard stylelint config",
     "devDependencies": {
+        "@tyisi/config-eslint": "workspace:*",
+        "@tyisi/config-prettier": "workspace:*",
+        "cosmiconfig": "^7.1.0",
         "eslint": "^9.12.0",
+        "globby": "^11.1.0",
+        "postcss": "^8.4.19",
         "prettier": "^3.3.3",
-        "tsup": "^8.3.0",
+        "stylelint": "^16.10.0",
+        "stylelint-config-standard": "^36.0.1",
+        "tsup": "^8.3.5",
         "typescript": "^5.6.3",
         "wireit": "^0.14.9"
     },
+    "type": "commonjs",
+    "main": "./dist/index.cjs",
     "exports": {
         ".": {
-            "import": "./dist/config.mjs",
-            "require": "./dist/config.cjs"
+            "import": "./dist/index.mjs",
+            "require": "./dist/index.cjs"
         }
     },
     "files": [
@@ -31,6 +40,7 @@
     "peerDependencies": {
         "stylelint": "^14.16.1"
     },
+    "prettier": "@tyisi/config-prettier",
     "repository": "https://github.com/TyIsI/configs.git",
     "scripts": {
         "build": "wireit",
@@ -43,10 +53,14 @@
     "version": "1.0.1",
     "wireit": {
         "build": {
+            "clean": true,
             "dependencies": [
                 "build:cjs",
                 "build:esm",
                 "type-check"
+            ],
+            "files": [
+                "src/index.ts"
             ]
         },
         "build:cjs": {
@@ -56,10 +70,10 @@
                 "type-check"
             ],
             "files": [
-                "src/config.ts"
+                "src/index.ts"
             ],
             "output": [
-                "dist/config.cjs"
+                "dist/index.cjs"
             ]
         },
         "build:esm": {
@@ -69,10 +83,10 @@
                 "type-check"
             ],
             "files": [
-                "src/config.ts"
+                "src/index.ts"
             ],
             "output": [
-                "dist/config.mjs"
+                "dist/index.mjs"
             ]
         },
         "lint": {
@@ -91,7 +105,10 @@
             ]
         },
         "type-check": {
-            "command": "tsc --noEmit"
+            "command": "tsc --noEmit",
+            "files": [
+                "src/index.ts"
+            ]
         }
     }
 }
