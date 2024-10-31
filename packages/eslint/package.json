@@ -35,9 +35,25 @@
             "import": "./dist/index.mjs",
             "types": "./dist/index.d.mts"
         },
+        "./cjs": {
+            "import": "./dist/cjs.mjs",
+            "types": "./dist/cjs.d.mts"
+        },
+        "./cjsx": {
+            "import": "./dist/cjsx.mjs",
+            "types": "./dist/cjsx.d.mts"
+        },
         "./combined": {
             "import": "./dist/combined.mjs",
             "types": "./dist/combined.d.mts"
+        },
+        "./cts": {
+            "import": "./dist/cts.mjs",
+            "types": "./dist/cts.d.mts"
+        },
+        "./ctsx": {
+            "import": "./dist/ctsx.mjs",
+            "types": "./dist/ctsx.d.mts"
         },
         "./js": {
             "import": "./dist/js.mjs",
@@ -46,6 +62,22 @@
         "./jsx": {
             "import": "./dist/jsx.mjs",
             "types": "./dist/jsx.d.mts"
+        },
+        "./mjs": {
+            "import": "./dist/mjs.mjs",
+            "types": "./dist/mjs.d.mts"
+        },
+        "./mjsx": {
+            "import": "./dist/mjsx.mjs",
+            "types": "./dist/mjsx.d.mts"
+        },
+        "./mts": {
+            "import": "./dist/mts.mjs",
+            "types": "./dist/mts.d.mts"
+        },
+        "./mtsx": {
+            "import": "./dist/mtsx.mjs",
+            "types": "./dist/mtsx.d.mts"
         },
         "./ts": {
             "import": "./dist/ts.mjs",
