@@ -2,24 +2,29 @@
     "author": "Ty Eggen",
     "dependencies": {
         "@eslint/js": "^9.12.0",
+        "deepmerge": "^4.3.1",
         "eslint-config-love": "^87.0.0",
         "eslint-config-prettier": "^9.1.0",
         "eslint-import-resolver-typescript": "^3.6.3",
         "eslint-plugin-import": "^2.31.0",
         "eslint-plugin-jsx-a11y": "^6.10.0",
         "eslint-plugin-react": "^7.37.1",
-        "globals": "^15.11.0"
+        "globals": "^15.11.0",
+        "rust-just": "^1.36.0"
     },
     "description": "various eslint configs",
     "devDependencies": {
         "@types/eslint-config-prettier": "^6.11.3",
         "@types/eslint-plugin-jsx-a11y": "^6.9.0",
         "@types/eslint__js": "^8.42.3",
-        "@types/node": "^20.0.0",
+        "@types/node": "^20.17.1",
+        "@types/react": "^18.3.12",
         "@typescript-eslint/utils": "^8.11.0",
         "eslint": "^9.12.0",
         "eslint-import-resolver-typescript": "^3.6.3",
+        "just-install": "^2.0.2",
         "prettier": "^3.3.3",
+        "react": "^18.3.1",
         "tsup": "^8.3.0",
         "typescript": "^5.6.3",
         "wireit": "^0.14.9"
@@ -118,59 +123,24 @@
         },
         "build:check": {
             "dependencies": [
-                "build:src",
-                "build:check:eslint:js"
-            ]
-        },
-        "build:check:eslint:js": {
-            "dependencies": [
                 "build:src"
             ],
-            "command": "eslint -c test-configs/eslint.config.cjs.mjs tests/cjs/*.cjs"
-        },
-        "build:check:eslint:ts": {
-            "dependencies": [
-                "build:src"
-            ],
-            "command": "eslint -c test-configs/eslint.config.ts.mjs tests/ts/*.ts"
+            "command": "just build-check"
         },
         "build:src": {
             "dependencies": [
-                "type-check",
-                "build:src:esm"
-            ],
-            "command": "tools/fix-dist-extensions.sh"
-        },
-        "build:src:esm": {
-            "clean": true,
-            "command": "tsup --format esm --outDir dist/ && tsup  --format esm --outDir dist/ --dts-only",
-            "dependencies": [
                 "type-check"
             ],
-            "files": [
-                "src/index.ts"
-            ],
-            "output": [
-                "dist/"
-            ]
+            "command": "just build"
         },
         "lint": {
             "dependencies": [
-                "lint:code",
-                "lint:format"
-            ]
-        },
-        "lint:code": {
-            "command": "eslint --fix src/ types/"
-        },
-        "lint:format": {
-            "command": "prettier -w .",
-            "dependencies": [
-                "lint:code"
-            ]
+                "type-check"
+            ],
+            "command": "just lint"
         },
         "type-check": {
-            "command": "tsc --noEmit"
+            "command": "just type-check"
         }
     }
 }
