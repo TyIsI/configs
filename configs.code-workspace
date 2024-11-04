@@ -29,7 +29,8 @@
         "recommendations": [
             "esbenp.prettier-vscode",
             "dbaeumer.vscode-eslint",
-            "google.wireit"
+            "google.wireit",
+            "nefrob.vscode-just-syntax"
         ]
     }
 }
