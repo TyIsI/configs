@@ -1,6 +1,6 @@
 import type { ConfigType } from '../lib/types.js'
 
-import { jsBaseOptions, jsxFeatureOptions } from '../lib/common.js'
+import { baseOptions, jsxFeatureOptions } from '../lib/common.js'
 import { baseConfigs } from '../lib/constants.js'
 import {
     eslintConfigLoveWithoutTypescript,
@@ -11,7 +11,7 @@ import { createConfigSlice, generateFlatConfig } from '../lib/functions.js'
 const jsxBaseConfig: ConfigType = createConfigSlice(
     '@tyisi/config-eslint/config/jsx',
     ...baseConfigs,
-    ...jsBaseOptions,
+    ...baseOptions,
     ...jsxFeatureOptions,
     eslintConfigLoveWithoutTypescript,
     eslintConfigPrettierWithoutTypescript

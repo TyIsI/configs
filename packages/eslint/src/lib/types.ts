@@ -19,14 +19,15 @@ export type FileTypes =
 export type RuleType =
     | 'common'
     | 'commonTS'
-    | 'import'
+    | 'imports'
     | 'react'
     | 'reactBaseRules'
     | 'ts'
     | 'tsx'
 
-export interface RuleSets
-    extends Partial<Record<RuleType, Linter.Config['rules']>> {}
+export type RuleSet = Linter.Config['rules']
+
+export interface RuleSets extends Partial<Record<RuleType, RuleSet>> {}
 
 interface NamefulConfigs
     extends Omit<Linter.Config, 'languageOptions' | 'plugins' | 'rules'> {
@@ -55,3 +56,8 @@ export type ConfigTypeKey = keyof ConfigType
 export type ConfigTypeKeys = ConfigTypeKey[]
 
 export type ConfigTypes = ConfigType[]
+
+export type ImportResolverSettings = {
+    typescript?: boolean
+    extensions?: string[]
+}

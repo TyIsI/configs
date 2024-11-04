@@ -1,18 +1,21 @@
 import type { ConfigType, ConfigTypes } from './types.js'
 
 import {
+    eslintConfigLoveOnlyTypescript,
+    eslintConfigLoveWithoutTypescript,
+    eslintConfigPrettierOnlyTypescript,
+    eslintConfigPrettierWithoutTypescript,
     globals,
     importPlugin,
     jsEslint,
     jsxA11y,
     recommendedFlatReactPluginsConfig
 } from './externals.js'
+import { createImportResolverSettings } from './functions.js'
 import { rules } from './rules.js'
 
 export const jsEslintConfigRecommended: ConfigType =
     jsEslint.configs.recommended
-export const importFlatConfigRecommended: ConfigType =
-    importPlugin.flatConfigs.recommended
 export const importFlatConfigTypescript: ConfigType =
     importPlugin.flatConfigs.typescript
 export const jsxA11yFlatConfigRecommended: ConfigType =
@@ -42,7 +45,7 @@ export const jsxA11yLanguageOptions: ConfigType = {
     languageOptions: jsxA11y.flatConfigs.recommended.languageOptions
 }
 
-export const commonRules = { rules: { ...rules.common, ...rules.import } }
+export const commonRules = { rules: { ...rules.common, ...rules.imports } }
 export const reactRules = { rules: rules.react }
 export const tsRules = { rules: rules.ts }
 export const tsxRules = { rules: rules.tsx }
@@ -51,45 +54,47 @@ export const reactVersionSettings: ConfigType = {
     settings: { react: { version: 'detect' } }
 }
 
-export const tsSettings: ConfigType = {
-    settings: {
-        'import/resolver': {
-            // You will also need to install and configure the TypeScript resolver
-            // See also https://github.com/import-js/eslint-import-resolver-typescript#configuration
-            typescript: true,
-            node: {
-                extensions: ['.ts']
-            }
-        }
-    }
-}
+export const tsSettings: ConfigType = createImportResolverSettings({
+    typescript: true
+})
 
-export const jsBaseOptions: ConfigTypes = [
+export const tsxSettings: ConfigType = createImportResolverSettings({
+    typescript: true,
+    extensions: ['.ts', '.tsx']
+})
+
+export const baseOptions: ConfigTypes = [
     jsEslintConfigRecommended,
-    importFlatConfigRecommended,
     nodeLanguageOptions,
+    eslintConfigLoveWithoutTypescript,
+    eslintConfigPrettierWithoutTypescript,
     commonRules
 ]
 
-export const commonJsFormatOptions: ConfigTypes = [commonJsLanguageOptions]
+export const commonJsFeatureOptions: ConfigTypes = [commonJsLanguageOptions]
 
-export const moduleJsFormatOptions: ConfigTypes = [moduleJsLanguageOptions]
+export const esmFeatureOptions: ConfigTypes = [moduleJsLanguageOptions]
 
 export const jsxFeatureOptions: ConfigTypes = [
     jsxA11yFlatConfigRecommended,
     jsxA11yLanguageOptions,
     recommendedFlatReactPluginsConfig,
     browserLanguageOptions,
-    nodeLanguageOptions,
     serviceWorkerLanguageOptions,
-    reactRules,
-    reactVersionSettings
+    reactVersionSettings,
+    reactRules
 ]
 
-export const typescriptFeatureOptions: ConfigTypes = [tsSettings, tsRules]
+export const typescriptFeatureOptions: ConfigTypes = [
+    importFlatConfigTypescript,
+    eslintConfigLoveOnlyTypescript,
+    eslintConfigPrettierOnlyTypescript,
+    tsSettings,
+    tsRules
+]
 
 export const tsxFeatureOptions: ConfigTypes = [
+    ...typescriptFeatureOptions,
     ...jsxFeatureOptions,
-    tsxRules,
-    ...typescriptFeatureOptions
+    tsxRules
 ]

@@ -1,8 +1,11 @@
+import deepmerge from 'deepmerge'
+
 import type {
     ConfigType,
     ConfigTypeKeys,
     ConfigTypes,
     FileTypes,
+    ImportResolverSettings,
     RuleType
 } from './types.js'
 
@@ -25,6 +28,8 @@ export const generateFlatConfig = (
 }
 
 export const hydrateConfigSlice = (...configItems: ConfigTypes): ConfigType => {
+    const protectedConfigKeys = ['plugins', 'rules']
+
     return configItems.reduce((collection, item) => {
         for (const propKey of Object.keys(item) as ConfigTypeKeys) {
             if (
@@ -44,10 +49,10 @@ export const hydrateConfigSlice = (...configItems: ConfigTypes): ConfigType => {
                 typeof item[propKey] === 'object'
             ) {
                 // @ts-expect-error mismatch
-                collection[propKey] = {
-                    ...collection[propKey],
-                    ...item[propKey]
-                }
+                collection[propKey] = protectedConfigKeys.includes(propKey)
+                    ? { ...collection[propKey], ...item[propKey] }
+                    : // @ts-expect-error mismatch
+                      deepmerge(collection[propKey], item[propKey])
             } else {
                 // @ts-expect-error mismatch
                 collection[propKey] = item[propKey]
@@ -69,5 +74,23 @@ export const createConfigSlice = (
     return {
         ...hydrateConfigSlice(...objs),
         name
+    }
+}
+
+export const createImportResolverSettings = ({
+    typescript,
+    extensions
+}: ImportResolverSettings): ConfigType => {
+    extensions ??= ['.ts']
+
+    return {
+        settings: {
+            'import/resolver': {
+                typescript,
+                node: {
+                    extensions
+                }
+            }
+        }
     }
 }

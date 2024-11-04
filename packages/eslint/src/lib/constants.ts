@@ -5,20 +5,20 @@ export const fileGlobs: Record<FileTypes, string[]> = {
     cjsx: ['**/*.cjsx'],
     cts: ['**/*.cts'],
     ctsx: ['**/*.ctsx'],
-    js: ['**/*.js'],
-    jsx: ['**/*.jsx'],
+    js: ['**/*.js', '**/*.cjs', '**/*.mjs'],
+    jsx: ['**/*.jsx', '**/*.cjsx', '**/*.mjsx'],
     mjs: ['**/*.mjs'],
     mjsx: ['**/*.mjsx'],
     mts: ['**/*.mts'],
     mtsx: ['**/*.mtsx'],
-    ts: ['**/*.ts'],
-    tsx: ['**/*.tsx']
+    ts: ['**/*.ts', '**/*.cts', '**/*.mts'],
+    tsx: ['**/*.tsx', '**/*.ctsx', '**/*.mtsx']
 }
 
 export const ValidRuleTypes = [
     'common',
     'commonTS',
-    'import',
+    'imports',
     'react',
     'reactBaseRules',
     'ts',
