@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "composite": true,
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "allowSyntheticDefaultImports": true,
+        "strictNullChecks": true,
+        "typeRoots": ["node_modules/@types", "types/@types"],
+        "jsx": "react"
+    },
+    "include": [
+        "tests/**/*.cjsx",
+        "tests/**/*.jsx",
+        "tests/**/*.mjsx",
+        "tests/**/*.ctsx",
+        "tests/**/*.tsx",
+        "tests/**/*.mtsx"
+    ]
+}

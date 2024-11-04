@@ -7,20 +7,5 @@
         "strictNullChecks": true,
         "typeRoots": ["node_modules/@types", "types/@types"]
     },
-    "include": [
-        "tsup.config.ts",
-        "tests/js/*.cjs",
-        "tests/js/*.js",
-        "tests/ts/*.ts",
-        "tests/js/PingExample.js",
-        "tests/js/JokeExample.js",
-        "tests/**/*.cjs",
-        "tests/**/*.js",
-        "tests/**/*.jsx",
-        "tests/**/*.mjs",
-        "tests/**/*.cts",
-        "tests/**/*.ts",
-        "tests/**/*.tsx",
-        "tests/**/*.mts"
-    ]
+    "include": ["tsup.config.ts"]
 }
