@@ -1,0 +1,39 @@
+build:
+    tsup --format esm --outDir dist/
+    tsup  --format esm --outDir dist/ --dts-only
+    tools/fix-dist-extensions.sh
+
+build-check:
+    #!/usr/bin/env -S parallel --shebang --ungroup --jobs {{ num_cpus() }}
+    pnpm exec just build-check-eslint-cjs
+    pnpm exec just build-check-eslint-js
+    pnpm exec just build-check-eslint-jsx
+    pnpm exec just build-check-eslint-mjs
+    pnpm exec just build-check-eslint-ts
+    pnpm exec just build-check-eslint-tsx
+
+build-check-eslint-cjs:
+    eslint -c tests/configs/eslint.config.cjs.mjs tests/files/cjs/*.cjs
+
+build-check-eslint-js:
+    eslint -c tests/configs/eslint.config.js.mjs tests/files/js/*.js tests/files/cjs/*.cjs tests/files/mjs/*.mjs
+
+build-check-eslint-jsx:
+    eslint -c tests/configs/eslint.config.jsx.mjs tests/files/jsx/*.jsx
+
+build-check-eslint-mjs:
+    eslint -c tests/configs/eslint.config.mjs.mjs tests/files/mjs/*.mjs
+
+build-check-eslint-ts:
+    eslint -c tests/configs/eslint.config.ts.mjs tests/files/ts/*.ts
+
+build-check-eslint-tsx:
+    eslint -c tests/configs/eslint.config.tsx.mjs tests/files/tsx/*.tsx
+
+lint:
+    eslint --fix src/ types/
+    prettier -w .
+    pnpm exec just --fmt --unstable
+
+type-check:
+    tsc --noEmit
