@@ -1,5 +1,12 @@
 {
-    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "composite": true,
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "allowSyntheticDefaultImports": true,
+        "strictNullChecks": true,
+        "typeRoots": ["node_modules/@types", "types/@types"]
+    },
     "include": [
         "tests/**/*.cjs",
         "tests/**/*.js",
