@@ -1,3 +1,7 @@
 import { js, ts } from '@tyisi/config-eslint'
 
-export default [...js, ...ts]
+export default [
+    { ignores: ["packages/*/dist/**"] },
+    ...js,
+    ...ts
+]
