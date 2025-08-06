@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# shellcheck disable=SC2094
 node_modules/.bin/prettier -w . \
     && (
         echo "# $(jq -r .name package.json)"
@@ -24,6 +25,7 @@ node_modules/.bin/prettier -w . \
         echo "## Packages"
         echo ""
 
+        # shellcheck disable=SC2094
         find packages/ -mindepth 2 -maxdepth 2 -name README.md | while read -r README_FILE; do
             sed 's/^#/##/g' "${README_FILE}"
         done
