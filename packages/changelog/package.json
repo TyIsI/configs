@@ -25,6 +25,9 @@
     "peerDependencies": {
         "git-cz": "^4.9.0"
     },
+    "publishConfig": {
+        "access": "public"
+    },
     "repository": "https://github.com/TyIsI/configs.git",
     "scripts": {
         "build": "wireit",
@@ -35,7 +38,7 @@
         "lint": "wireit",
         "type-check": "wireit"
     },
-    "version": "1.0.1",
+    "version": "2.0.0",
     "wireit": {
         "build": {
             "dependencies": [

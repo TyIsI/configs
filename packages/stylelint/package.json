@@ -40,6 +40,9 @@
         "stylelint": "^14.16.1"
     },
     "prettier": "@tyisi/config-prettier",
+    "publishConfig": {
+        "access": "public"
+    },
     "repository": "https://github.com/TyIsI/configs.git",
     "scripts": {
         "build": "wireit",
@@ -50,7 +53,7 @@
         "type-check": "wireit"
     },
     "type": "commonjs",
-    "version": "1.1.0",
+    "version": "2.0.0",
     "wireit": {
         "build": {
             "clean": true,
