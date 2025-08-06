@@ -1,30 +1,28 @@
 {
     "author": "Ty Eggen",
     "dependencies": {
-        "stylelint-config-clean-order": "^6.1.0",
-        "stylelint-config-css-modules": "^4.4.0",
+        "stylelint-config-clean-order": "^7.0.0",
+        "stylelint-config-css-modules": "^4.5.1",
         "stylelint-config-property-sort-order-smacss": "^10.0.0",
-        "stylelint-config-standard-scss": "^13.1.0",
-        "stylelint-order": "^6.0.4",
-        "stylelint-prettier": "^5.0.2"
+        "stylelint-config-standard-scss": "^15.0.1",
+        "stylelint-order": "^7.0.0",
+        "stylelint-prettier": "^5.0.3"
     },
     "description": "my standard stylelint config",
     "devDependencies": {
         "@tyisi/config-eslint": "workspace:*",
         "@tyisi/config-prettier": "workspace:*",
-        "cosmiconfig": "^7.1.0",
-        "eslint": "^9.12.0",
-        "globby": "^11.1.0",
-        "postcss": "^8.4.19",
-        "prettier": "^3.3.3",
-        "stylelint": "^16.10.0",
-        "stylelint-config-standard": "^36.0.1",
-        "tsup": "^8.3.5",
+        "cosmiconfig": "^9.0.0",
+        "eslint": "^9.32.0",
+        "globby": "^14.1.0",
+        "postcss": "^8.5.6",
+        "prettier": "^3.6.2",
+        "stylelint": "^16.23.0",
+        "stylelint-config-standard": "^39.0.0",
+        "tsup": "^8.5.0",
         "typescript": "^5.6.3",
-        "wireit": "^0.14.9"
+        "wireit": "^0.14.12"
     },
-    "type": "commonjs",
-    "main": "./dist/index.cjs",
     "exports": {
         ".": {
             "import": "./dist/index.mjs",
@@ -36,6 +34,7 @@
     ],
     "keywords": [],
     "license": "ISC",
+    "main": "./dist/index.cjs",
     "name": "@tyisi/config-stylelint",
     "peerDependencies": {
         "stylelint": "^14.16.1"
@@ -50,6 +49,7 @@
         "lint": "wireit",
         "type-check": "wireit"
     },
+    "type": "commonjs",
     "version": "1.1.0",
     "wireit": {
         "build": {
