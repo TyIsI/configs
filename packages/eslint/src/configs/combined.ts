@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-spread -- Intentional misuse due javascript*/
 import type { ConfigTypes } from '../lib/types.js'
 
 import { cjsConfig } from './cjs.js'
@@ -29,3 +30,4 @@ export const combinedConfig: ConfigTypes = {
 }
 
 export default combinedConfig
+/* eslint-enable @typescript-eslint/no-misused-spread */

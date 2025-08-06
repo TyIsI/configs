@@ -2,8 +2,8 @@ import deepmerge from 'deepmerge'
 
 import type {
     ConfigType,
-    ConfigTypeKeys,
     ConfigTypes,
+    ConfigTypeKeys,
     FileTypes,
     ImportResolverSettings,
     RuleType
@@ -19,7 +19,7 @@ export const generateFlatConfig = (
         throw new Error(`globName is not string: ${typeof globName}`)
 
     return configs.map((c) => {
-        if (c.files == null) c.files = fileGlobs[globName]
+        if (c.files == null) c = { ...c, files: fileGlobs[globName] }
         else if (Array.isArray(c.files))
             c.files = [...new Set([...c.files, ...fileGlobs[globName]])]
 
@@ -30,52 +30,64 @@ export const generateFlatConfig = (
 export const hydrateConfigSlice = (...configItems: ConfigTypes): ConfigType => {
     const protectedConfigKeys = ['plugins', 'rules']
 
-    return configItems.reduce((collection, item) => {
-        for (const propKey of Object.keys(item) as ConfigTypeKeys) {
-            if (
-                propKey in collection &&
-                Array.isArray(collection[propKey]) &&
-                Array.isArray(item[propKey])
-            ) {
-                // @ts-expect-error mismatch
-                collection[propKey] = [
-                    ...new Set([...collection[propKey], ...item[propKey]])
-                ]
-            } else if (
-                propKey in collection &&
-                collection[propKey] != null &&
-                typeof collection[propKey] === 'object' &&
-                item[propKey] != null &&
-                typeof item[propKey] === 'object'
-            ) {
-                // @ts-expect-error mismatch
-                collection[propKey] = protectedConfigKeys.includes(propKey)
-                    ? { ...collection[propKey], ...item[propKey] }
-                    : // @ts-expect-error mismatch
-                      deepmerge(collection[propKey], item[propKey])
-            } else {
-                // @ts-expect-error mismatch
-                collection[propKey] = item[propKey]
+    return configItems.reduce<ConfigType>(
+        // eslint-disable-next-line complexity -- trust me bro
+        (collection: ConfigType, item: ConfigType) => {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- trust me bro
+            for (const propKey of Object.keys(item) as ConfigTypeKeys) {
+                const { [propKey]: existingEntry } = collection
+                const { [propKey]: itemEntry } = item
+
+                if (Array.isArray(existingEntry) && Array.isArray(itemEntry)) {
+                    collection = {
+                        ...collection,
+                        [propKey]: [
+                            ...new Set([...existingEntry, ...itemEntry])
+                        ]
+                    }
+                } else if (
+                    existingEntry != null &&
+                    typeof existingEntry === 'object' &&
+                    !Array.isArray(existingEntry) &&
+                    itemEntry != null &&
+                    typeof itemEntry === 'object' &&
+                    !Array.isArray(itemEntry)
+                ) {
+                    if (protectedConfigKeys.includes(propKey))
+                        collection = {
+                            ...collection,
+                            [propKey]: { ...existingEntry, ...itemEntry }
+                        }
+                    else {
+                        // @ts-expect-error Trust me bro. I'm a Ferrari!
+                        const deepMerged = deepmerge(existingEntry, itemEntry)
+
+                        collection = {
+                            ...collection,
+                            [propKey]: deepMerged
+                        }
+                    }
+                } else {
+                    collection = { ...collection, [propKey]: itemEntry }
+                }
             }
-        }
 
-        return collection
-    }, {})
+            return collection
+        },
+        {}
+    )
 }
 
-export const isRulesetType = (name?: unknown): name is RuleType => {
-    return ValidRuleTypes.includes(name as RuleType)
-}
+export const isRulesetType = (inp?: unknown): inp is RuleType =>
+    typeof inp === 'string' && ValidRuleTypes.includes(inp)
 
 export const createConfigSlice = (
     name: string,
     ...objs: object[]
-): ConfigType => {
-    return {
-        ...hydrateConfigSlice(...objs),
-        name
-    }
-}
+): ConfigType => ({
+    ...hydrateConfigSlice(...objs),
+    name
+})
 
 export const createImportResolverSettings = ({
     typescript,

@@ -8,7 +8,7 @@ export class PingExample {
         if (requestObject.getRequestArgument('message') != null) {
             requestObject.setRenderProperty(
                 'message',
-                requestObject.getRequestArgument('message') as string
+                requestObject.getRequestArgument<string>('message')
             )
         } else {
             requestObject.setRenderProperty('message', 'message in a bottle')

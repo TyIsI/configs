@@ -23,7 +23,7 @@ export const ValidRuleTypes = [
     'reactBaseRules',
     'ts',
     'tsx'
-] as const
+]
 
 export const baseConfigs: ConfigTypes = [
     {

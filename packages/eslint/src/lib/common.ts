@@ -25,6 +25,18 @@ export const browserLanguageOptions: ConfigType = {
     languageOptions: { globals: globals.browser }
 }
 
+export const browserRulesOptions: ConfigType = {
+    rules: {
+        'no-console': 'error'
+    }
+}
+
+export const cliRulesOptions: ConfigType = {
+    rules: {
+        'no-console': 'off'
+    }
+}
+
 export const commonJsLanguageOptions: ConfigType = {
     languageOptions: { ecmaVersion: 'latest', sourceType: 'commonjs' }
 }
@@ -80,6 +92,7 @@ export const jsxFeatureOptions: ConfigTypes = [
     jsxA11yLanguageOptions,
     recommendedFlatReactPluginsConfig,
     browserLanguageOptions,
+    browserRulesOptions,
     serviceWorkerLanguageOptions,
     reactVersionSettings,
     reactRules

@@ -5,6 +5,7 @@ export const Logger = {
 }
 
 export interface IRequestAdapter {
-    getRequestArgument: (requestArgumentName: string) => unknown
+    /* eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters -- It's an interface */
+    getRequestArgument: <T = unknown>(requestArgumentName: string) => T
     setRenderProperty: (propertyName: string, propertyValue: unknown) => void
 }

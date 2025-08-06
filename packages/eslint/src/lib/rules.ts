@@ -16,7 +16,9 @@ const common: RuleSet = {
 
     'class-methods-use-this': ['off'],
 
-    'no-magic-numbers': ['off']
+    'no-magic-numbers': ['off'],
+
+    'no-console': 'off'
 }
 
 const imports: RuleSet = {

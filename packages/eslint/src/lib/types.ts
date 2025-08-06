@@ -25,16 +25,14 @@ export type RuleType =
     | 'ts'
     | 'tsx'
 
+export type RuleTypes = RuleType[]
+
 export type RuleSet = Linter.Config['rules']
 
 export interface RuleSets extends Partial<Record<RuleType, RuleSet>> {}
 
 interface NamefulConfigs
     extends Omit<Linter.Config, 'languageOptions' | 'plugins' | 'rules'> {
-    processor?:
-        | string
-        | Linter.Config['processor']
-        | TSESLint.FlatConfig.Config['processor']
     plugins?: Linter.Config['plugins'] | ReactFlatConfig['plugins']
 }
 
@@ -57,7 +55,7 @@ export type ConfigTypeKeys = ConfigTypeKey[]
 
 export type ConfigTypes = ConfigType[]
 
-export type ImportResolverSettings = {
+export interface ImportResolverSettings {
     typescript?: boolean
     extensions?: string[]
 }

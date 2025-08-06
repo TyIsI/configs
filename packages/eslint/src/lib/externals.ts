@@ -62,9 +62,7 @@ export const recommendedFlatReactPluginsConfig: Linter.Config = {
         }
     },
 
-    // @ts-expect-error non existent
     languageOptions: eslintPluginReact.configs.flat.recommended.languageOptions,
 
-    // @ts-expect-error non existent
     rules: eslintPluginReact.configs.flat.recommended.rules
 }

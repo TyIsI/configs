@@ -1,16 +1,19 @@
+help:
+    just -l
+
 build:
     tsup --format esm --outDir dist/
     tsup  --format esm --outDir dist/ --dts-only
     tools/fix-dist-extensions.sh
 
 build-check:
-    #!/usr/bin/env -S parallel --shebang --ungroup --jobs {{ num_cpus() }}
-    pnpm exec just build-check-eslint-cjs
-    pnpm exec just build-check-eslint-js
-    pnpm exec just build-check-eslint-jsx
-    pnpm exec just build-check-eslint-mjs
-    pnpm exec just build-check-eslint-ts
-    pnpm exec just build-check-eslint-tsx
+    #!/usr/bin/env sh
+
+    MAX_CPUS=$(cat /proc/cpuinfo | grep 'cpu cores' | perl -pe 's/.*(\d+)/$1/g' | sort -u)
+
+    echo build-check-eslint-cjs build-check-eslint-js build-check-eslint-jsx build-check-eslint-mjs build-check-eslint-ts build-check-eslint-tsx \
+         | shuf \
+         | xargs -P${MAX_CPUS} -I% sh -c 'pnpm just %'
 
 build-check-eslint-cjs:
     eslint -c tests/configs/eslint.config.cjs.mjs tests/files/cjs/*.cjs
