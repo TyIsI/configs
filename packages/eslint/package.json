@@ -1,40 +1,36 @@
 {
     "author": "Ty Eggen",
     "dependencies": {
-        "@eslint/js": "^9.12.0",
+        "@eslint/js": "^9.32.0",
         "deepmerge": "^4.3.1",
-        "eslint-config-love": "^87.0.0",
-        "eslint-config-prettier": "^9.1.0",
-        "eslint-import-resolver-typescript": "^3.6.3",
-        "eslint-plugin-import": "^2.31.0",
-        "eslint-plugin-jsx-a11y": "^6.10.0",
-        "eslint-plugin-react": "^7.37.1",
-        "globals": "^15.11.0",
-        "rust-just": "^1.36.0"
+        "eslint-config-love": "^121.0.0",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-import-resolver-typescript": "^4.4.4",
+        "eslint-plugin-import": "^2.32.0",
+        "eslint-plugin-jsx-a11y": "^6.10.2",
+        "eslint-plugin-react": "^7.37.5",
+        "globals": "^16.3.0",
+        "rust-just": "^1.42.4"
     },
     "description": "various eslint configs",
     "devDependencies": {
         "@types/eslint-config-prettier": "^6.11.3",
-        "@types/eslint-plugin-jsx-a11y": "^6.9.0",
-        "@types/eslint__js": "^8.42.3",
+        "@types/eslint-plugin-jsx-a11y": "^6.10.0",
         "@types/node": "^20.17.1",
         "@types/react": "^18.3.12",
-        "@typescript-eslint/utils": "^8.11.0",
-        "eslint": "^9.12.0",
-        "eslint-import-resolver-typescript": "^3.6.3",
+        "@typescript-eslint/utils": "^8.39.0",
+        "eslint": "^9.32.0",
+        "eslint-import-resolver-typescript": "^4.4.4",
         "just-install": "^2.0.2",
-        "prettier": "^3.3.3",
+        "prettier": "^3.6.2",
         "react": "^18.3.1",
-        "tsup": "^8.3.0",
+        "tsup": "^8.5.0",
         "typescript": "^5.6.3",
-        "wireit": "^0.14.9"
+        "wireit": "^0.14.12"
     },
     "engines": {
         "node": ">=20"
     },
-    "type": "module",
-    "main": "./dist/index.mjs",
-    "types": "./dist/index.d.mts",
     "exports": {
         ".": {
             "import": "./dist/index.mjs",
@@ -98,6 +94,7 @@
     ],
     "keywords": [],
     "license": "ISC",
+    "main": "./dist/index.mjs",
     "name": "@tyisi/config-eslint",
     "peerDependencies": {
         "eslint": "^9.12.0",
@@ -112,6 +109,8 @@
         "lint": "wireit",
         "type-check": "wireit"
     },
+    "type": "module",
+    "types": "./dist/index.d.mts",
     "version": "4.0.0",
     "wireit": {
         "build": {
@@ -122,22 +121,24 @@
             ]
         },
         "build:check": {
+            "command": "just build-check",
             "dependencies": [
                 "build:src"
-            ],
-            "command": "just build-check"
+            ]
         },
         "build:src": {
+            "command": "just build",
+            "files":["src/"],
+            "output":["dist/**"],
             "dependencies": [
                 "type-check"
-            ],
-            "command": "just build"
+            ]
         },
         "lint": {
+            "command": "just lint",
             "dependencies": [
                 "type-check"
-            ],
-            "command": "just lint"
+            ]
         },
         "type-check": {
             "command": "just type-check"
