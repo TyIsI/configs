@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "ES2016",
+        "target": "esnext",
         "module": "ES2015",
         "moduleResolution": "Node",
         "noEmit": true,
@@ -14,9 +14,12 @@
         "sourceMap": false,
         "resolveJsonModule": true,
         "skipDefaultLibCheck": true,
-        "rootDir": "."
+        "rootDir": ".",
+        "lib": ["ESNext"],
+        "outDir": "./dist/"
     },
     "include": ["./src/*.ts"],
+    "exclude": ["node_modules/"],
     "references": [
         {
             "path": "tsconfig.node.json"
