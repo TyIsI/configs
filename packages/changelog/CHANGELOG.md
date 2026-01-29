@@ -1,5 +1,11 @@
 # @tyisi/config-changelog
 
+## 3.0.0
+
+### Major Changes
+
+- fd959ae: Fresh updates!
+
 ## 2.0.0
 
 ### Major Changes
