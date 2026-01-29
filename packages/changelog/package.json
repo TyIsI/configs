@@ -2,12 +2,12 @@
     "author": "Ty Eggen",
     "description": "a git-cz config generator",
     "devDependencies": {
-        "eslint": "9.32.0",
-        "git-cz": "^4.9.0",
-        "prettier": "3.6.2",
-        "tsup": "8.5.0",
-        "typescript": "^5.6.3",
-        "wireit": "^0.14.12"
+        "eslint": "9.39.2",
+        "git-cz": "4.9.0",
+        "prettier": "3.8.1",
+        "tsup": "8.5.1",
+        "typescript": "5.9.3",
+        "wireit": "0.14.12"
     },
     "exports": {
         ".": {
@@ -23,7 +23,7 @@
     "license": "ISC",
     "name": "@tyisi/config-changelog",
     "peerDependencies": {
-        "git-cz": "^4.9.0"
+        "git-cz": "4.9.0"
     },
     "publishConfig": {
         "access": "public"
@@ -34,10 +34,11 @@
         "build:cjs": "wireit",
         "build:dts": "wireit",
         "build:esm": "wireit",
-        "commit": "npx git-cz@latest --scope=changelog",
+        "commit": "git-cz --scope=changelog",
         "lint": "wireit",
         "type-check": "wireit"
     },
+    "type": "module",
     "version": "2.0.0",
     "wireit": {
         "build": {
@@ -63,7 +64,7 @@
         },
         "build:dts": {
             "clean": true,
-            "command": "tsup --cjsInterop --dts-only",
+            "command": "tsup --cjsInterop --dts-only --format esm",
             "dependencies": [
                 "type-check"
             ],
