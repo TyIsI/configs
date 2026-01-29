@@ -25,6 +25,7 @@
 !changelog.config.cjs
 !configs.code-workspace
 !eslint.config.mjs
+!knip.config.ts
 !.prettierignore
 
 !tsconfig.*.json
