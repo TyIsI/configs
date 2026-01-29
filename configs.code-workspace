@@ -1,36 +1,83 @@
 {
+    "extensions": {
+        "recommendations": [
+            "codeandstuff.package-json-upgrade",
+            "dbaeumer.vscode-eslint",
+            "esbenp.prettier-vscode",
+            "google.wireit",
+            "nefrob.vscode-just-syntax"
+        ]
+    },
     "folders": [
-        { "name": "project", "path": "." },
-        { "name": "changelog", "path": "./packages/changelog" },
-        { "name": "eslint", "path": "./packages/eslint" },
-        { "name": "prettier", "path": "./packages/prettier" },
-        { "name": "stylelint", "path": "./packages/stylelint" }
+        {
+            "name": "project",
+            "path": "."
+        },
+        {
+            "name": "changelog",
+            "path": "./packages/changelog"
+        },
+        {
+            "name": "eslint",
+            "path": "./packages/eslint"
+        },
+        {
+            "name": "prettier",
+            "path": "./packages/prettier"
+        },
+        {
+            "name": "stylelint",
+            "path": "./packages/stylelint"
+        }
     ],
     "settings": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "[ignore]": {
+            "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[javascript]": {
+            "editor.codeActionsOnSave": {
+                "source.addMissingImports.ts": "always",
+                "source.fixAll.eslint": "always",
+                "source.fixAll.prettier": "always"
+            },
+            "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[javascriptreact]": {
+            "editor.codeActionsOnSave": {
+                "source.addMissingImports.ts": "always",
+                "source.fixAll.eslint": "always",
+                "source.fixAll.prettier": "always"
+            },
+            "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[json]": {
+            "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[markdown]": {
+            "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
         "[shellscript]": {
             "editor.defaultFormatter": "esbenp.prettier-vscode",
             "files.eol": "\n"
         },
         "[typescript]": {
-            "editor.defaultFormatter": "esbenp.prettier-vscode",
             "editor.codeActionsOnSave": {
                 "source.addMissingImports.ts": "always",
                 "source.fixAll.eslint": "always",
-                "source.fixAll.shellcheck": "always",
-                "source.fixAll.ts": "always",
-                "source.organizeImports": "always",
-                "source.organizeLinkDefinitions": "always",
-                "source.sortImports": "always"
-            }
-        }
-    },
-    "extensions": {
-        "recommendations": [
-            "esbenp.prettier-vscode",
-            "dbaeumer.vscode-eslint",
-            "google.wireit",
-            "nefrob.vscode-just-syntax"
-        ]
+                "source.fixAll.prettier": "always",
+                "source.fixAll.ts": "always"
+            },
+            "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[typescriptreact]": {
+            "editor.codeActionsOnSave": {
+                "source.addMissingImports.ts": "always",
+                "source.fixAll.eslint": "always",
+                "source.fixAll.prettier": "always",
+                "source.fixAll.ts": "always"
+            },
+            "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     }
 }
