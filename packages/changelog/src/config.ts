@@ -1,25 +1,75 @@
 import type { GenerateChangelog, GitCzConfig } from './types'
 
 const types = {
-    hotfix: {
-        description: 'Hotfix',
-        emoji: '🚑️',
-        value: 'hotfix'
-    },
     feat: {
         description: 'A new feature',
         emoji: '✨',
         value: 'feat'
     },
     fix: {
-        description: 'A bug fix',
+        description: 'Fix a bug',
         emoji: '🐛',
         value: 'fix'
+    },
+    hotfix: {
+        description: 'Hotfix',
+        emoji: '🚑️',
+        value: 'hotfix'
+    },
+    assets: {
+        description: 'Assets (images/etc)',
+        emoji: '🍱',
+        value: 'assets'
     },
     breaking: {
         description: 'Breaking changes',
         emoji: '💥',
         value: 'breaking'
+    },
+    build: {
+        description: 'Build related changes',
+        emoji: '🧰',
+        value: 'build'
+    },
+    chore: {
+        description: "Other changes that don't modify src or test files",
+        emoji: '🤖',
+        value: 'chore'
+    },
+    ci: {
+        description: 'Changes to CI configuration files and scripts',
+        emoji: '👷',
+        value: 'ci'
+    },
+    cleanup: {
+        description: 'Cleaning up code/repository',
+        emoji: '🔥',
+        value: 'cleanup'
+    },
+    content: {
+        description: 'Content',
+        emoji: '📝',
+        value: 'content'
+    },
+    dependencies: {
+        description: 'Dependencies related changes',
+        emoji: '📦',
+        value: 'dependencies'
+    },
+    dev: {
+        description: 'Development related changes',
+        emoji: '🧰',
+        value: 'dev'
+    },
+    docs: {
+        description: 'Documentation only changes',
+        emoji: '✏️ ',
+        value: 'docs'
+    },
+    package: {
+        description: 'Package related changes',
+        emoji: '📦',
+        value: 'package'
     },
     perf: {
         description: 'A code change that improves performance',
@@ -31,95 +81,50 @@ const types = {
         emoji: '🚚',
         value: 'refactor'
     },
-    schema: {
-        description: 'Database related changes',
-        emoji: '🗃️ ',
-        value: 'schema'
-    },
-    content: {
-        description: 'Content',
-        emoji: '📝',
-        value: 'content'
-    },
-    style: {
-        description: 'Visual',
-        emoji: '💄',
-        value: 'style'
-    },
-    assets: {
-        description: 'Assets (images/etc)',
-        emoji: '🍱',
-        value: 'assets'
-    },
-    cleanup: {
-        description: 'Cleaning up code/repository',
-        emoji: '🔥',
-        value: 'cleanup'
-    },
-    docs: {
-        description: 'Documentation only changes',
-        emoji: '✏️ ',
-        value: 'docs'
-    },
-    test: {
-        description: 'Adding/updating tests',
-        emoji: '❎',
-        value: 'test'
-    },
-    formatting: {
-        description: 'Formatting',
-        emoji: '📝',
-        value: 'formatting'
-    },
-    dev: {
-        description: 'Development related changes',
-        emoji: '🧰',
-        value: 'dev'
-    },
-    stories: {
-        description: 'Storybook updates',
-        emoji: '📖',
-        value: 'stories'
-    },
-    build: {
-        description: 'Build related changes',
-        emoji: '🧰',
-        value: 'build'
-    },
-    ci: {
-        description: 'CI related changes',
-        emoji: '🎡',
-        value: 'ci'
+    release: {
+        description: 'Create a release commit',
+        emoji: '🚀',
+        value: 'release'
     },
     repository: {
         description: 'Repository related changes',
         emoji: '📦',
         value: 'repository'
     },
-    package: {
-        description: 'Package related changes',
-        emoji: '📦',
-        value: 'package'
+    revert: {
+        description: 'Revert changes',
+        emoji: '⏪',
+        value: 'revert'
     },
-    dependencies: {
-        description: 'Dependencies related changes',
-        emoji: '📦',
-        value: 'dependencies'
+    schema: {
+        description: 'Database related changes',
+        emoji: '🗃️ ',
+        value: 'schema'
     },
-    release: {
-        description: 'Create a release commit',
-        emoji: '🏹',
-        value: 'release'
+    stories: {
+        description: 'Storybook updates',
+        emoji: '📖',
+        value: 'stories'
+    },
+    style: {
+        description: 'Improve structure / format of the code',
+        emoji: '📝',
+        value: 'style'
+    },
+    test: {
+        description: 'Add or update tests',
+        emoji: '✅',
+        value: 'test'
     },
     tools: {
         description: 'Tools and scripts',
         emoji: '🛠️ ',
         value: 'tools'
     },
-    chore: {
-        description: 'Build process or auxiliary tool changes',
-        emoji: '🤖',
-        value: 'chore'
+    visual: {
+        description: 'Visual styling',
+        emoji: '🎨',
+        value: 'visual'
     },
     wip: {
         description: 'Work in Progress',
@@ -128,6 +133,7 @@ const types = {
     }
 }
 
+/** @public */
 export const generateChangelog: GenerateChangelog = (
     ...packages: string[]
 ): GitCzConfig => {
@@ -155,4 +161,5 @@ export const generateChangelog: GenerateChangelog = (
     }
 }
 
-export default generateChangelog
+/** @public */
+export default generateChangelog()
