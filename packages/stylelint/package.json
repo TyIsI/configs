@@ -1,30 +1,31 @@
 {
     "author": "Ty Eggen",
     "dependencies": {
-        "stylelint-config-clean-order": "^7.0.0",
-        "stylelint-config-css-modules": "^4.5.1",
-        "stylelint-config-property-sort-order-smacss": "^10.0.0",
-        "stylelint-config-standard-scss": "^15.0.1",
-        "stylelint-order": "^7.0.0",
-        "stylelint-prettier": "^5.0.3"
+        "stylelint-config-clean-order": "8.0.0",
+        "stylelint-config-css-modules": "4.6.0",
+        "stylelint-config-property-sort-order-smacss": "11.1.0",
+        "stylelint-config-standard-scss": "17.0.0",
+        "stylelint-order": "7.0.1",
+        "stylelint-prettier": "5.0.3"
     },
     "description": "my standard stylelint config",
     "devDependencies": {
         "@tyisi/config-eslint": "workspace:*",
         "@tyisi/config-prettier": "workspace:*",
-        "cosmiconfig": "^9.0.0",
-        "eslint": "^9.32.0",
-        "globby": "^14.1.0",
-        "postcss": "^8.5.6",
-        "prettier": "^3.6.2",
-        "stylelint": "^16.23.0",
-        "stylelint-config-standard": "^39.0.0",
-        "tsup": "^8.5.0",
-        "typescript": "^5.6.3",
-        "wireit": "^0.14.12"
+        "cosmiconfig": "9.0.0",
+        "eslint": "9.39.2",
+        "git-cz": "4.9.0",
+        "postcss": "8.5.6",
+        "prettier": "3.8.1",
+        "stylelint": "17.0.0",
+        "stylelint-config-standard": "40.0.0",
+        "tsup": "8.5.1",
+        "typescript": "5.9.3",
+        "wireit": "0.14.12"
     },
     "exports": {
         ".": {
+            "types": "./dist/index.d.ts",
             "import": "./dist/index.mjs",
             "require": "./dist/index.cjs"
         }
@@ -37,9 +38,8 @@
     "main": "./dist/index.cjs",
     "name": "@tyisi/config-stylelint",
     "peerDependencies": {
-        "stylelint": "^14.16.1"
+        "stylelint": "17.0.0"
     },
-    "prettier": "@tyisi/config-prettier",
     "publishConfig": {
         "access": "public"
     },
@@ -48,11 +48,11 @@
         "build": "wireit",
         "build:cjs": "wireit",
         "build:esm": "wireit",
-        "commit": "npx git-cz@latest --scope=stylelint",
+        "commit": "git-cz --scope=stylelint",
         "lint": "wireit",
         "type-check": "wireit"
     },
-    "type": "commonjs",
+    "type": "module",
     "version": "2.0.0",
     "wireit": {
         "build": {
@@ -60,6 +60,7 @@
             "dependencies": [
                 "build:cjs",
                 "build:esm",
+                "build:dts",
                 "type-check"
             ],
             "files": [
@@ -77,6 +78,21 @@
             ],
             "output": [
                 "dist/index.cjs"
+            ]
+        },
+        "build:dts": {
+            "clean": true,
+            "command": "tsup --format esm --dts-only",
+            "dependencies": [
+                "type-check",
+                "build:cjs",
+                "build:esm"
+            ],
+            "files": [
+                "src/index.ts"
+            ],
+            "output": [
+                "dist/index.d.ts"
             ]
         },
         "build:esm": {
