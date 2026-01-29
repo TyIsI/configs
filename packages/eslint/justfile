@@ -1,37 +1,107 @@
 help:
     just -l
 
-build:
-    tsup --format esm --outDir dist/
-    tsup  --format esm --outDir dist/ --dts-only
-    tools/fix-dist-extensions.sh
+build: build_dist build_hydrators copy_lib fix_dist_extensions
 
-build-check:
+[parallel]
+build_dist:
+    tsup
+
+build_check:
     #!/usr/bin/env sh
 
     MAX_CPUS=$(cat /proc/cpuinfo | grep 'cpu cores' | perl -pe 's/.*(\d+)/$1/g' | sort -u)
 
-    echo build-check-eslint-cjs build-check-eslint-js build-check-eslint-jsx build-check-eslint-mjs build-check-eslint-ts build-check-eslint-tsx \
+    grep '^build_check_eslint' justfile | cut -f1 -d: | xargs \
          | shuf \
          | xargs -P${MAX_CPUS} -I% sh -c 'pnpm just %'
 
-build-check-eslint-cjs:
+build_check_eslint_com_combined:
+    eslint -c tests/configs/eslint.config.combined.cjs tests/files/cjs/*.cjs tests/files/js/*.js tests/files/jsx/*.jsx tests/files/mjs/*.mjs tests/files/ts/*.ts tests/files/tsx/*.tsx
+
+build_check_eslint_com_cjs:
+    eslint -c tests/configs/eslint.config.cjs.cjs tests/files/cjs/*.cjs
+
+build_check_eslint_com_js:
+    eslint -c tests/configs/eslint.config.js.cjs tests/files/js/*.js tests/files/cjs/*.cjs tests/files/mjs/*.mjs
+
+build_check_eslint_com_jsx:
+    eslint -c tests/configs/eslint.config.jsx.cjs tests/files/jsx/*.jsx
+
+build_check_eslint_com_mjs:
+    eslint -c tests/configs/eslint.config.mjs.cjs tests/files/mjs/*.mjs
+
+build_check_eslint_com_ts:
+    eslint -c tests/configs/eslint.config.ts.cjs tests/files/ts/*.ts
+
+build_check_eslint_com_tsx:
+    eslint -c tests/configs/eslint.config.tsx.cjs tests/files/tsx/*.tsx
+
+build_check_eslint_esm_combined:
+    eslint -c tests/configs/eslint.config.combined.mjs tests/files/cjs/*.cjs tests/files/js/*.js tests/files/jsx/*.jsx tests/files/mjs/*.mjs tests/files/ts/*.ts tests/files/tsx/*.tsx
+
+build_check_eslint_esm_cjs:
     eslint -c tests/configs/eslint.config.cjs.mjs tests/files/cjs/*.cjs
 
-build-check-eslint-js:
+build_check_eslint_esm_js:
     eslint -c tests/configs/eslint.config.js.mjs tests/files/js/*.js tests/files/cjs/*.cjs tests/files/mjs/*.mjs
 
-build-check-eslint-jsx:
+build_check_eslint_esm_jsx:
     eslint -c tests/configs/eslint.config.jsx.mjs tests/files/jsx/*.jsx
 
-build-check-eslint-mjs:
+build_check_eslint_esm_mjs:
     eslint -c tests/configs/eslint.config.mjs.mjs tests/files/mjs/*.mjs
 
-build-check-eslint-ts:
+build_check_eslint_esm_ts:
     eslint -c tests/configs/eslint.config.ts.mjs tests/files/ts/*.ts
 
-build-check-eslint-tsx:
+build_check_eslint_esm_tsx:
     eslint -c tests/configs/eslint.config.tsx.mjs tests/files/tsx/*.tsx
+
+build_hydrators:
+    echo build_hydrators_cjs build_hydrators_cjsx build_hydrators_cts build_hydrators_ctsx build_hydrators_js build_hydrators_jsx build_hydrators_mjs build_hydrators_mjsx build_hydrators_mts build_hydrators_mtsx build_hydrators_ts build_hydrators_tsx | xargs -n1 | shuf | xargs -P$(cat /proc/cpuinfo | grep -c '^processor') -I% just %
+
+build_hydrators_cjs:
+    tsx src/helpers/generate-hydrators.ts cjs
+
+build_hydrators_cjsx:
+    tsx src/helpers/generate-hydrators.ts cjsx
+
+build_hydrators_cts:
+    tsx src/helpers/generate-hydrators.ts cts
+
+build_hydrators_ctsx:
+    tsx src/helpers/generate-hydrators.ts ctsx
+
+build_hydrators_js:
+    tsx src/helpers/generate-hydrators.ts js
+
+build_hydrators_jsx:
+    tsx src/helpers/generate-hydrators.ts jsx
+
+build_hydrators_mjs:
+    tsx src/helpers/generate-hydrators.ts mjs
+
+build_hydrators_mjsx:
+    tsx src/helpers/generate-hydrators.ts mjsx
+
+build_hydrators_mts:
+    tsx src/helpers/generate-hydrators.ts mts
+
+build_hydrators_mtsx:
+    tsx src/helpers/generate-hydrators.ts mtsx
+
+build_hydrators_ts:
+    tsx src/helpers/generate-hydrators.ts ts
+
+build_hydrators_tsx:
+    tsx src/helpers/generate-hydrators.ts tsx
+
+copy_lib:
+    rsync -av lib/ dist/
+
+fix_dist_extensions:
+    tools/fix-dist-extensions.sh
 
 lint:
     eslint --fix src/ types/

@@ -6,8 +6,13 @@ import jsxA11y from 'eslint-plugin-jsx-a11y'
 import eslintPluginReact from 'eslint-plugin-react'
 import globals from 'globals'
 
-import type { Linter, Rule } from 'eslint'
+import type { ConfigType } from './types.js'
+import type { TSESLint } from '@typescript-eslint/utils'
 
+import { baseExcludeRules } from './constants.js'
+import { withFilteredConfigProp } from './functions.js'
+
+/** @public */
 export {
     eslintConfigLove,
     eslintConfigPrettier,
@@ -18,47 +23,71 @@ export {
     jsxA11y
 }
 
-export const eslintConfigLoveWithoutTypescript: Linter.Config = {
-    // @ts-expect-error mismatch
-    plugins: Object.entries(eslintConfigLove.plugins)
-        .filter(([plugin]) => !plugin.includes('@typescript-eslint'))
-        .reduce((c, [k, v]) => ({ ...c, [k]: v }), {}),
-    // @ts-expect-error mismatch
-    rules: Object.entries(eslintConfigLove.rules)
-        .filter(([k]) => !k.startsWith('@typescript-eslint'))
-        .reduce((c, [k, v]) => ({ ...c, [k]: v }), {})
+/** @public */
+export const eslintConfigLoveWithoutTypescript: ConfigType = {
+    plugins: withFilteredConfigProp(
+        eslintConfigLove,
+        'plugins',
+        'exclude',
+        // @ts-expect-error -- TODO: FIX ME YOLO
+        '@typescript-eslint'
+    ),
+    rules: withFilteredConfigProp(
+        eslintConfigLove,
+        'rules',
+        'exclude',
+        ...baseExcludeRules,
+        '@typescript-eslint'
+    )
 }
 
-export const eslintConfigPrettierWithoutTypescript: Linter.Config = {
-    rules: Object.entries(eslintConfigPrettier.rules)
-        .filter(([k]) => !k.startsWith('@typescript-eslint'))
-        .reduce((c, [k, v]) => ({ ...c, [k]: v }), {})
+/** @public */
+export const eslintConfigPrettierWithoutTypescript: ConfigType = {
+    rules: withFilteredConfigProp(
+        eslintConfigPrettier,
+        'rules',
+        'exclude',
+        ...baseExcludeRules,
+        '@typescript-eslint'
+    )
 }
 
-export const eslintConfigLoveOnlyTypescript: Linter.Config = {
+/** @public */
+export const eslintConfigLoveOnlyTypescript: TSESLint.FlatConfig.Config = {
     linterOptions: eslintConfigLove.linterOptions,
-    // @ts-expect-error mismatch
     languageOptions: eslintConfigLove.languageOptions,
-    // @ts-expect-error mismatch
-    plugins: Object.entries(eslintConfigLove.plugins)
-        .filter(([plugin]) => plugin.includes('@typescript-eslint'))
-        .reduce((c, [k, v]) => ({ ...c, [k]: v }), {}),
-    // @ts-expect-error mismatch
-    rules: Object.entries(eslintConfigLove.rules)
-        .filter(([k]) => k.startsWith('@typescript-eslint'))
-        .reduce((c, [k, v]) => ({ ...c, [k]: v }), {})
+    plugins: withFilteredConfigProp(
+        eslintConfigLove,
+        'plugins',
+        'only',
+        '@typescript-eslint',
+        'import'
+    ),
+    rules: withFilteredConfigProp(
+        eslintConfigLove,
+        'rules',
+        'only',
+        '@typescript-eslint',
+        'import'
+    )
 }
 
-export const eslintConfigPrettierOnlyTypescript: Linter.Config = {
-    rules: Object.entries(eslintConfigPrettier.rules)
-        .filter(([k]) => k.startsWith('@typescript-eslint'))
-        .reduce((c, [k, v]) => ({ ...c, [k]: v }), {})
+/** @public */
+export const eslintConfigPrettierOnlyTypescript: ConfigType = {
+    rules: withFilteredConfigProp(
+        eslintConfigLove,
+        'rules',
+        'only',
+        '@typescript-eslint'
+    )
 }
 
-export const recommendedFlatReactPluginsConfig: Linter.Config = {
+/** @public */
+export const recommendedFlatReactPluginsConfig: ConfigType = {
     plugins: {
         react: {
-            rules: eslintPluginReact.rules as Record<string, Rule.RuleModule>
+            ...eslintPluginReact,
+            rules: eslintPluginReact.rules
         }
     },
 

@@ -1,5 +1,7 @@
 import type { RuleSet, RuleSets } from './types.js'
 
+import { eslintConfigLoveOnlyTypescript } from './externals.js'
+
 const common: RuleSet = {
     'no-unused-vars': [
         'error',
@@ -18,7 +20,11 @@ const common: RuleSet = {
 
     'no-magic-numbers': ['off'],
 
-    'no-console': 'off'
+    'no-console': 'off',
+
+    'eqeqeq': ['error', 'always', { null: 'ignore' }],
+
+    'no-negated-condition': 'off'
 }
 
 const imports: RuleSet = {
@@ -54,7 +60,8 @@ const imports: RuleSet = {
                 'sibling',
                 'object'
             ],
-            'newlines-between': 'always',
+
+            'newlines-between': 'always-and-inside-groups',
 
             'pathGroups': [
                 {
@@ -64,47 +71,7 @@ const imports: RuleSet = {
                 },
                 {
                     group: 'internal',
-                    pattern: '@/app/**',
-                    position: 'before'
-                },
-                {
-                    group: 'internal',
-                    pattern: '@/components/**',
-                    position: 'before'
-                },
-                {
-                    group: 'internal',
-                    pattern: '@/images/**',
-                    position: 'before'
-                },
-                {
-                    group: 'internal',
-                    pattern: '@/lib/**',
-                    position: 'before'
-                },
-                {
-                    group: 'internal',
-                    pattern: '@/pages/**',
-                    position: 'before'
-                },
-                {
-                    group: 'internal',
-                    pattern: '@/providers/**',
-                    position: 'before'
-                },
-                {
-                    group: 'internal',
-                    pattern: '@/shared/**',
-                    position: 'before'
-                },
-                {
-                    group: 'internal',
-                    pattern: '@/services/**',
-                    position: 'before'
-                },
-                {
-                    group: 'internal',
-                    pattern: '@/types/**',
+                    pattern: '@/**',
                     position: 'before'
                 },
                 {
@@ -119,12 +86,17 @@ const imports: RuleSet = {
                 }
             ],
 
-            'pathGroupsExcludedImportTypes': ['react']
+            'pathGroupsExcludedImportTypes': ['react'],
+
+            'sortTypesGroup': true,
+
+            'newlines-between-types': 'always-and-inside-groups'
         }
     ]
 }
 
 const commonTS: RuleSet = {
+    ...eslintConfigLoveOnlyTypescript.rules,
     'no-loop-func': ['off'],
     'no-underscore-dangle': ['off'],
     'no-unused-expressions': ['off'],

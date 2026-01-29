@@ -1,119 +1,187 @@
 {
+    "name": "@tyisi/config-eslint",
     "author": "Ty Eggen",
-    "dependencies": {
-        "@eslint/js": "^9.32.0",
-        "deepmerge": "^4.3.1",
-        "eslint-config-love": "^121.0.0",
-        "eslint-config-prettier": "^10.1.8",
-        "eslint-import-resolver-typescript": "^4.4.4",
-        "eslint-plugin-import": "^2.32.0",
-        "eslint-plugin-jsx-a11y": "^6.10.2",
-        "eslint-plugin-react": "^7.37.5",
-        "globals": "^16.3.0",
-        "rust-just": "^1.42.4"
-    },
     "description": "various eslint configs",
     "devDependencies": {
-        "@types/eslint-config-prettier": "^6.11.3",
-        "@types/eslint-plugin-jsx-a11y": "^6.10.0",
-        "@types/node": "^20.17.1",
-        "@types/react": "^18.3.12",
-        "@typescript-eslint/utils": "^8.39.0",
-        "eslint": "^9.32.0",
-        "eslint-import-resolver-typescript": "^4.4.4",
-        "just-install": "^2.0.2",
-        "prettier": "^3.6.2",
-        "react": "^18.3.1",
-        "tsup": "^8.5.0",
-        "typescript": "^5.6.3",
-        "wireit": "^0.14.12"
+        "@eslint-community/eslint-plugin-eslint-comments": "4.6.0",
+        "@eslint/js": "9.39.2",
+        "@tyisi/config-prettier": "workspace:*",
+        "@types/eslint-plugin-jsx-a11y": "6.10.1",
+        "@types/node": "^24.10.9",
+        "@types/react": "^19.2.10",
+        "@typescript-eslint/utils": "8.54.0",
+        "deepmerge": "4.3.1",
+        "eslint": "9.39.2",
+        "eslint-config-love": "149.0.0",
+        "eslint-config-prettier": "10.1.8",
+        "eslint-import-resolver-typescript": "4.4.4",
+        "eslint-plugin-import": "2.32.0",
+        "eslint-plugin-jsx-a11y": "6.10.2",
+        "eslint-plugin-n": "^17.23.2",
+        "eslint-plugin-promise": "^7.2.1",
+        "eslint-plugin-react": "7.37.5",
+        "git-cz": "4.9.0",
+        "globals": "17.2.0",
+        "just-install": "2.0.2",
+        "prettier": "3.8.1",
+        "react": "^19.2.4",
+        "tsup": "8.5.1",
+        "tsx": "^4.21.0",
+        "typescript": "5.9.3",
+        "typescript-eslint": "^8.54.0",
+        "wireit": "0.14.12"
     },
     "engines": {
         "node": ">=20"
     },
     "exports": {
         ".": {
-            "import": "./dist/index.mjs",
-            "types": "./dist/index.d.mts"
+            "types": {
+                "require": "./dist/all.d.cts",
+                "import": "./dist/all.d.mts"
+            },
+            "require": "./dist/all.cjs",
+            "import": "./dist/all.mjs"
+        },
+        "./all": {
+            "types": {
+                "require": "./dist/all.d.cts",
+                "import": "./dist/all.d.mts"
+            },
+            "require": "./dist/all.cjs",
+            "import": "./dist/all.mjs"
         },
         "./cjs": {
-            "import": "./dist/cjs.mjs",
-            "types": "./dist/cjs.d.mts"
+            "types": {
+                "require": "./dist/cjs.d.cts",
+                "import": "./dist/cjs.d.mts"
+            },
+            "require": "./dist/cjs.cjs",
+            "import": "./dist/cjs.mjs"
         },
         "./cjsx": {
-            "import": "./dist/cjsx.mjs",
-            "types": "./dist/cjsx.d.mts"
+            "types": {
+                "require": "./dist/cjsx.d.cts",
+                "import": "./dist/cjsx.d.mts"
+            },
+            "require": "./dist/cjsx.cjs",
+            "import": "./dist/cjsx.mjs"
         },
         "./combined": {
-            "import": "./dist/combined.mjs",
-            "types": "./dist/combined.d.mts"
+            "types": {
+                "require": "./dist/combined.d.cts",
+                "import": "./dist/combined.d.mts"
+            },
+            "require": "./dist/combined.cjs",
+            "import": "./dist/combined.mjs"
         },
         "./cts": {
-            "import": "./dist/cts.mjs",
-            "types": "./dist/cts.d.mts"
+            "types": {
+                "require": "./dist/cts.d.cts",
+                "import": "./dist/cts.d.mts"
+            },
+            "require": "./dist/cts.cjs",
+            "import": "./dist/cts.mjs"
         },
         "./ctsx": {
-            "import": "./dist/ctsx.mjs",
-            "types": "./dist/ctsx.d.mts"
+            "types": {
+                "require": "./dist/ctsx.d.cts",
+                "import": "./dist/ctsx.d.mts"
+            },
+            "require": "./dist/ctsx.cjs",
+            "import": "./dist/ctsx.mjs"
         },
         "./js": {
-            "import": "./dist/js.mjs",
-            "types": "./dist/js.d.mts"
+            "types": {
+                "require": "./dist/js.d.cts",
+                "import": "./dist/js.d.mts"
+            },
+            "require": "./dist/js.cjs",
+            "import": "./dist/js.mjs"
         },
         "./jsx": {
-            "import": "./dist/jsx.mjs",
-            "types": "./dist/jsx.d.mts"
+            "types": {
+                "require": "./dist/jsx.d.cts",
+                "import": "./dist/jsx.d.mts"
+            },
+            "require": "./dist/jsx.cjs",
+            "import": "./dist/jsx.mjs"
         },
         "./mjs": {
-            "import": "./dist/mjs.mjs",
-            "types": "./dist/mjs.d.mts"
+            "types": {
+                "require": "./dist/mjs.d.cts",
+                "import": "./dist/mjs.d.mts"
+            },
+            "require": "./dist/mjs.cjs",
+            "import": "./dist/mjs.mjs"
         },
         "./mjsx": {
-            "import": "./dist/mjsx.mjs",
-            "types": "./dist/mjsx.d.mts"
+            "types": {
+                "require": "./dist/mjsx.d.cts",
+                "import": "./dist/mjsx.d.mts"
+            },
+            "require": "./dist/mjsx.cjs",
+            "import": "./dist/mjsx.mjs"
         },
         "./mts": {
-            "import": "./dist/mts.mjs",
-            "types": "./dist/mts.d.mts"
+            "types": {
+                "require": "./dist/mts.d.cts",
+                "import": "./dist/mts.d.mts"
+            },
+            "require": "./dist/mts.cjs",
+            "import": "./dist/mts.mjs"
         },
         "./mtsx": {
-            "import": "./dist/mtsx.mjs",
-            "types": "./dist/mtsx.d.mts"
+            "types": {
+                "require": "./dist/mtsx.d.cts",
+                "import": "./dist/mtsx.d.mts"
+            },
+            "require": "./dist/mtsx.cjs",
+            "import": "./dist/mtsx.mjs"
         },
         "./ts": {
-            "import": "./dist/ts.mjs",
-            "types": "./dist/ts.d.mts"
+            "types": {
+                "require": "./dist/ts.d.cts",
+                "import": "./dist/ts.d.mts"
+            },
+            "require": "./dist/ts.cjs",
+            "import": "./dist/ts.mjs"
         },
         "./tsx": {
-            "import": "./dist/tsx.mjs",
-            "types": "./dist/tsx.d.mts"
+            "types": {
+                "require": "./dist/tsx.d.cts",
+                "import": "./dist/tsx.d.mts"
+            },
+            "require": "./dist/tsx.cjs",
+            "import": "./dist/tsx.mjs"
         }
     },
     "files": [
-        "./dist"
+        "./dist",
+        "./package.json",
+        "./README.md"
     ],
     "keywords": [],
     "license": "ISC",
-    "main": "./dist/index.mjs",
-    "name": "@tyisi/config-eslint",
+    "main": "./dist/all.mjs",
     "peerDependencies": {
-        "eslint": "^9.12.0",
-        "prettier": "^3.3.3"
+        "eslint": "9.39.2",
+        "prettier": "3.8.1"
     },
     "publishConfig": {
         "access": "public"
     },
-    "repository": "https://github.com/TyIsI/configs.git",
+    "repository": "TyIsI/configs",
     "scripts": {
         "build": "wireit",
         "build:check": "wireit",
         "build:src": "wireit",
-        "commit": "npx git-cz@latest --scope=eslint",
+        "commit": "git-cz --scope=eslint",
         "lint": "wireit",
         "type-check": "wireit"
     },
     "type": "module",
-    "types": "./dist/index.d.mts",
+    "types": "./dist/all.d.mts",
     "version": "5.0.0",
     "wireit": {
         "build": {
@@ -124,9 +192,12 @@
             ]
         },
         "build:check": {
-            "command": "just build-check",
+            "command": "just build_check",
             "dependencies": [
                 "build:src"
+            ],
+            "files": [
+                "src/"
             ]
         },
         "build:src": {
@@ -135,7 +206,10 @@
                 "type-check"
             ],
             "files": [
-                "src/"
+                "lib/**/*",
+                "src/**/*",
+                "tools/fix-dist-extensions.sh",
+                "tsup.config.ts"
             ],
             "output": [
                 "dist/**"
@@ -148,7 +222,10 @@
             ]
         },
         "type-check": {
-            "command": "just type-check"
+            "command": "just type-check",
+            "files": [
+                "src/**/*.ts"
+            ]
         }
     }
 }

@@ -5,7 +5,6 @@
         "moduleResolution": "Node",
         "allowSyntheticDefaultImports": true,
         "strictNullChecks": true,
-        "typeRoots": ["node_modules/@types", "types/@types"],
         "jsx": "react"
     },
     "include": [
@@ -15,5 +14,6 @@
         "tests/**/*.ctsx",
         "tests/**/*.tsx",
         "tests/**/*.mtsx"
-    ]
+    ],
+    "exclude": ["dist/"]
 }

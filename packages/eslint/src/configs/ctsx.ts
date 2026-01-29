@@ -1,21 +1,20 @@
-import type { ConfigType } from '../lib/types.js'
-
 import {
+    baseConfigs,
     baseOptions,
     commonJsFeatureOptions,
     tsxFeatureOptions
 } from '../lib/common.js'
-import { baseConfigs } from '../lib/constants.js'
 import { createConfigSlice, generateFlatConfig } from '../lib/functions.js'
 
-const ctsxBaseConfig: ConfigType = createConfigSlice(
-    '@tyisi/config-eslint/config/ctsx',
-    ...baseConfigs,
-    ...baseOptions,
-    ...tsxFeatureOptions,
-    ...commonJsFeatureOptions
+const ctsxConfig = generateFlatConfig(
+    'ctsx',
+    createConfigSlice(
+        '@tyisi/config-eslint/config/ctsx',
+        ...baseConfigs,
+        ...baseOptions,
+        ...tsxFeatureOptions,
+        ...commonJsFeatureOptions
+    )
 )
-
-export const ctsxConfig = generateFlatConfig('ctsx', ctsxBaseConfig)
 
 export default ctsxConfig

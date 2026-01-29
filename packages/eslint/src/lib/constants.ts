@@ -1,6 +1,6 @@
-import type { ConfigTypes, FileTypes } from './types.js'
+export type FileTypes = keyof typeof fileGlobs
 
-export const fileGlobs: Record<FileTypes, string[]> = {
+export const fileGlobs: Record<string, string[]> = {
     cjs: ['**/*.cjs'],
     cjsx: ['**/*.cjsx'],
     cts: ['**/*.cts'],
@@ -25,10 +25,4 @@ export const ValidRuleTypes = [
     'tsx'
 ]
 
-export const baseConfigs: ConfigTypes = [
-    {
-        name: '@tyisi/config-eslint/baseConfig/ignores',
-
-        ignores: ['**/node_modules/', '**/build/', '**/dist/', '**/env.d.ts']
-    }
-]
+export const baseExcludeRules: string[] = ['no-negated-condition', 'strict']

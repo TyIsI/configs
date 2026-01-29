@@ -1,30 +1,16 @@
-import { cjsConfig } from './configs/cjs.js'
-import { cjsxConfig } from './configs/cjsx.js'
-import { combinedConfig } from './configs/combined.js'
-import { ctsConfig } from './configs/cts.js'
-import { ctsxConfig } from './configs/ctsx.js'
-import { jsConfig } from './configs/js.js'
-import { jsxConfig } from './configs/jsx.js'
-import { mjsConfig } from './configs/mjs.js'
-import { mjsxConfig } from './configs/mjsx.js'
-import { mtsConfig } from './configs/mts.js'
-import { mtsxConfig } from './configs/mtsx.js'
-import { tsConfig } from './configs/ts.js'
-import { tsxConfig } from './configs/tsx.js'
-
-export const cjs = cjsConfig
-export const cjsx = cjsxConfig
-export const combined = combinedConfig
-export const cts = ctsConfig
-export const ctsx = ctsxConfig
-export const js = jsConfig
-export const jsx = jsxConfig
-export const mjs = mjsConfig
-export const mjsx = mjsxConfig
-export const mts = mtsConfig
-export const mtsx = mtsxConfig
-export const ts = tsConfig
-export const tsx = tsxConfig
+import cjs from './configs/cjs.js'
+import cjsx from './configs/cjsx.js'
+import combined from './configs/combined.js'
+import cts from './configs/cts.js'
+import ctsx from './configs/ctsx.js'
+import js from './configs/js.js'
+import jsx from './configs/jsx.js'
+import mjs from './configs/mjs.js'
+import mjsx from './configs/mjsx.js'
+import mts from './configs/mts.js'
+import mtsx from './configs/mtsx.js'
+import ts from './configs/ts.js'
+import tsx from './configs/tsx.js'
 
 export const configs = {
     cjs,
@@ -42,4 +28,4 @@ export const configs = {
     tsx
 }
 
-export default combinedConfig
+export default combined

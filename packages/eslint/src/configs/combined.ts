@@ -1,33 +1,33 @@
 /* eslint-disable @typescript-eslint/no-misused-spread -- Intentional misuse due javascript*/
 import type { ConfigTypes } from '../lib/types.js'
 
-import { cjsConfig } from './cjs.js'
-import { cjsxConfig } from './cjsx.js'
-import { ctsConfig } from './cts.js'
-import { ctsxConfig } from './ctsx.js'
-import { jsConfig } from './js.js'
-import { jsxConfig } from './jsx.js'
-import { mjsConfig } from './mjs.js'
-import { mjsxConfig } from './mjsx.js'
-import { mtsConfig } from './mts.js'
-import { mtsxConfig } from './mtsx.js'
-import { tsConfig } from './ts.js'
-import { tsxConfig } from './tsx.js'
+import cjs from './cjs.js'
+import cjsx from './cjsx.js'
+import cts from './cts.js'
+import ctsx from './ctsx.js'
+import js from './js.js'
+import jsx from './jsx.js'
+import mjs from './mjs.js'
+import mjsx from './mjsx.js'
+import mts from './mts.js'
+import mtsx from './mtsx.js'
+import ts from './ts.js'
+import tsx from './tsx.js'
 
-export const combinedConfig: ConfigTypes = {
-    ...cjsConfig,
-    ...cjsxConfig,
-    ...ctsConfig,
-    ...ctsxConfig,
-    ...jsConfig,
-    ...jsxConfig,
-    ...mjsConfig,
-    ...mjsxConfig,
-    ...mtsConfig,
-    ...mtsxConfig,
-    ...tsConfig,
-    ...tsxConfig
+const combined: ConfigTypes = {
+    ...cjs,
+    ...cjsx,
+    ...cts,
+    ...ctsx,
+    ...mjs,
+    ...mjsx,
+    ...mts,
+    ...mtsx,
+    ...js,
+    ...jsx,
+    ...ts,
+    ...tsx
 }
 
-export default combinedConfig
+export default combined
 /* eslint-enable @typescript-eslint/no-misused-spread */

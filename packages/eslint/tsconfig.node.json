@@ -5,7 +5,13 @@
         "moduleResolution": "Node",
         "allowSyntheticDefaultImports": true,
         "strictNullChecks": true,
-        "typeRoots": ["node_modules/@types", "types/@types"]
+        "types": ["node"]
     },
-    "include": ["tsup.config.ts"]
+    "include": [
+        "tsup.config.ts",
+        "tsup.code.config.ts",
+        "tsup.declarations.config.ts",
+        "vite.config.ts"
+    ],
+    "exclude": ["dist/"]
 }

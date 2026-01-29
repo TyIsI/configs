@@ -2,20 +2,7 @@ import type { TSESLint } from '@typescript-eslint/utils'
 import type { Linter } from 'eslint'
 import type { ReactFlatConfig } from 'eslint-plugin-react'
 
-export type FileTypes =
-    | 'cjs'
-    | 'cjsx'
-    | 'cts'
-    | 'ctsx'
-    | 'js'
-    | 'jsx'
-    | 'mjs'
-    | 'mjsx'
-    | 'mts'
-    | 'mtsx'
-    | 'ts'
-    | 'tsx'
-
+/** @public */
 export type RuleType =
     | 'common'
     | 'commonTS'
@@ -25,37 +12,69 @@ export type RuleType =
     | 'ts'
     | 'tsx'
 
+/** @public */
 export type RuleTypes = RuleType[]
 
+/** @public */
 export type RuleSet = Linter.Config['rules']
 
+/** @public */
 export interface RuleSets extends Partial<Record<RuleType, RuleSet>> {}
 
-interface NamefulConfigs
-    extends Omit<Linter.Config, 'languageOptions' | 'plugins' | 'rules'> {
-    plugins?: Linter.Config['plugins'] | ReactFlatConfig['plugins']
-}
 
-interface NamefulReactFlatConfig
-    extends Omit<ReactFlatConfig, 'plugins'>,
-        NamefulConfigs {}
-
-interface NamefulConfigLove
-    extends Omit<TSESLint.FlatConfig.Config, 'processor' | 'plugins'>,
-        NamefulConfigs {}
-
+/** @public */
 export type ConfigType =
     | Linter.Config
-    | NamefulReactFlatConfig
-    | NamefulConfigLove
+    | ReactFlatConfig
     | TSESLint.FlatConfig.Config
 
-export type ConfigTypeKey = keyof ConfigType
+    /** @public */
+    export type ConfigTypeKey = keyof ConfigType
+/** @public */
 export type ConfigTypeKeys = ConfigTypeKey[]
 
+/** @public */
 export type ConfigTypes = ConfigType[]
 
+/** @public */
 export interface ImportResolverSettings {
     typescript?: boolean
     extensions?: string[]
 }
+
+/** @public */
+export interface ConfigTypeRules {
+    rules: RuleSet
+}
+
+/** @public */
+export interface ConfigExport {
+    default: ConfigTypes
+}
+
+/** @public */
+export type FilteredConfigKey = Extract<
+    keyof Partial<ConfigType>,
+    'plugins' | 'rules' | 'settings'
+>
+
+/** @public */
+export type FilteredConfigType = Pick<Partial<ConfigType>, FilteredConfigKey>
+
+/** @public */
+export type FilterConfigProp<T extends FilteredConfigKey = FilteredConfigKey> =
+    FilteredConfigType[T]
+
+/** @public */
+export type FilteredOutput<
+    E extends boolean,
+    P extends FilterConfigProp,
+    F extends keyof P = keyof P
+> = E extends true ? Partial<Pick<P, F>> : Partial<Omit<P, F>>
+
+/** @public */
+export type OneOf<A, B> = (
+    A extends B ? (Extract<B, A> extends never ? false : true) : false
+) extends true
+    ? true
+    : false
