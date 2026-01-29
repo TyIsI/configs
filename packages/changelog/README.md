@@ -1,10 +1,10 @@
 # @tyisi/config-changelog
 
-a git-cz config generator
+a git-cz compatible config generator
 
 ## Features
 
--   Expressive commit messages
+- Expressive commit messages
 
 ## Exports
 
