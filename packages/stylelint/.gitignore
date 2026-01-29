@@ -5,8 +5,13 @@
 !src/**/
 !src/**/*
 
+!tests/
+!tests/**/
+!tests/**/*
+
 !package.json
 !stylelint.config.cjs
+!stylelint.config.mjs
 !tsconfig.json
 !tsconfig.*.json
 !tsup.config.ts
