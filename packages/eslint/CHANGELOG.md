@@ -1,5 +1,11 @@
 # @tyisi/config-eslint
 
+## 6.0.0
+
+### Major Changes
+
+- fd959ae: Fresh updates!
+
 ## 5.0.0
 
 ### Major Changes
