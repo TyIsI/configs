@@ -18,4 +18,5 @@ const options: Options = {
     cjsInterop: true
 }
 
+/** @internal */
 export default defineConfig(options)
