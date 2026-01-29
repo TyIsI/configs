@@ -31,4 +31,5 @@ class JokeExample {
     }
 }
 
+/** @public */
 module.exports.JokeExample = JokeExample

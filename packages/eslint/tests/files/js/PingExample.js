@@ -5,7 +5,10 @@
 class PingExample {
     reply(requestObject) {
         if (requestObject.getRequestArgument('message') != null) {
-            requestObject.setRenderProperty('message', requestObject.getRequestArgument('message'))
+            requestObject.setRenderProperty(
+                'message',
+                requestObject.getRequestArgument('message')
+            )
         } else {
             requestObject.setRenderProperty('message', 'message in a bottle')
         }
