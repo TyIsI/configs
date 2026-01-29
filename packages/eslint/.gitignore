@@ -1,6 +1,10 @@
 *
 !.gitignore
 
+!lib/
+!lib/**/
+!lib/**/*
+
 !src/
 !src/**/
 !src/**/*
