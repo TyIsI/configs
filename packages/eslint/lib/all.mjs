@@ -1,0 +1,13 @@
+/* eslint-disable import/no-unresolved -- YOLO */
+export * as cjs from './cjs.mjs'
+export * as cjsx from './cjsx.mjs'
+export * as cts from './cts.mjs'
+export * as ctsx from './ctsx.mjs'
+export * as js from './js.mjs'
+export * as jsx from './jsx.mjs'
+export * as mjs from './mjs.mjs'
+export * as mjsx from './mjsx.mjs'
+export * as mts from './mts.mjs'
+export * as mtsx from './mtsx.mjs'
+export * as ts from './ts.mjs'
+export * as tsx from './tsx.mjs'
