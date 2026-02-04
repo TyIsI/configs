@@ -36,8 +36,8 @@ jobs:
                   node-version: 24
                   registry-url: 'https://registry.npmjs.org'
 
-            - name: Re-install npm
-              run: npm install -g npm@11
+            - name: Upgrade npm if needed
+              run: npm install -g npm@">=11.5.1"
 
             - name: install dependencies
               run: pnpm install
