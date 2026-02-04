@@ -4,43 +4,13 @@ type PrettierOverrides = Required<Prettier.Config>['overrides']
 
 type PrettierPlugins = Required<Prettier.Config>['plugins']
 
-abstract class PrettierConfig implements Prettier.Config {
-    __embeddedInHtml?: boolean
-    arrowParens?: 'always' | 'avoid'
-    bracketSameLine?: boolean
-    bracketSpacing?: boolean
-    checkIgnorePragma?: boolean
-    embeddedLanguageFormatting?: 'auto' | 'off'
-    endOfLine?: 'auto' | 'lf' | 'crlf' | 'cr'
-    experimentalOperatorPosition?: 'start' | 'end'
-    experimentalTernaries?: boolean
-    filepath?: string
-    htmlWhitespaceSensitivity?: 'strict' | 'css' | 'ignore'
-    insertPragma?: boolean
-    jsxBracketSameLine?: boolean
-    jsxSingleQuote?: boolean
-    objectWrap?: 'preserve' | 'collapse'
-    parentParser?: string
-    parser?: Prettier.LiteralUnion<Prettier.BuiltInParserName, string>
-    printWidth?: number
-    proseWrap?: 'always' | 'preserve' | 'never'
-    quoteProps?: 'preserve' | 'consistent' | 'as-needed'
-    rangeEnd?: number
-    rangeStart?: number
-    requirePragma?: boolean
-    semi?: boolean
-    singleAttributePerLine?: boolean
-    singleQuote?: boolean
-    tabWidth?: number
-    trailingComma?: 'none' | 'es5' | 'all'
-    useTabs?: boolean
-    vueIndentScriptAndStyle?: boolean
+abstract class PrettierConfig
+    implements Partial<Prettier.Config>, Prettier.Options
+{
+    [x: string]: unknown
 
     overrides?: PrettierOverrides
-
-    plugins?: PrettierPlugins;
-
-    [x: string]: unknown
+    plugins?: PrettierPlugins
 }
 
 export class Config extends PrettierConfig {
