@@ -20,8 +20,8 @@
         },
         "./base": {
             "types": {
-                "require": "./dist/full.d.cts",
-                "import": "./dist/full.d.mts"
+                "require": "./dist/base.d.cts",
+                "import": "./dist/base.d.mts"
             },
             "import": "./dist/base.mjs",
             "require": "./dist/base.cjs"
@@ -36,16 +36,16 @@
         },
         "./sh": {
             "types": {
-                "require": "./dist/full.d.cts",
-                "import": "./dist/full.d.mts"
+                "require": "./dist/sh.d.cts",
+                "import": "./dist/sh.d.mts"
             },
             "import": "./dist/sh.mjs",
             "require": "./dist/sh.cjs"
         },
         "./tailwindcss": {
             "types": {
-                "require": "./dist/full.d.cts",
-                "import": "./dist/full.d.mts"
+                "require": "./dist/tailwindcss.d.cts",
+                "import": "./dist/tailwindcss.d.mts"
             },
             "import": "./dist/tailwindcss.mjs",
             "require": "./dist/tailwindcss.cjs"
