@@ -23,7 +23,7 @@
     "scripts": {
         "build": "wireit",
         "changeset": "changeset",
-        "ci:publish": "pnpm publish -r --access public",
+        "ci:publish": "pnpm -r publish --access public --no-git-checks",
         "commit": "git-cz",
         "lint": "wireit"
     },
