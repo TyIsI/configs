@@ -1,5 +1,14 @@
 # @tyisi/config-prettier
 
+## 5.0.0
+
+### Major Changes
+
+- a7a66e5: Fixed various issues with typing and skeleton config
+
+  - Types were broken. (Pointing at full config.)
+  - Abstract class generated undefined values.
+
 ## 4.0.0
 
 ### Major Changes
