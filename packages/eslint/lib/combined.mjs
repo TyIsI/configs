@@ -3,12 +3,12 @@ import cjs from './cjs.mjs'
 import cjsx from './cjsx.mjs'
 import cts from './cts.mjs'
 import ctsx from './ctsx.mjs'
+import js from './js.mjs'
+import jsx from './jsx.mjs'
 import mjs from './mjs.mjs'
 import mjsx from './mjsx.mjs'
 import mts from './mts.mjs'
 import mtsx from './mtsx.mjs'
-import js from './js.mjs'
-import jsx from './jsx.mjs'
 import ts from './ts.mjs'
 import tsx from './tsx.mjs'
 
@@ -34,6 +34,7 @@ const combined = [
     else if (idx > 0) {
         const { plugins, ...restConfig } = e
 
+        // eslint-disable-next-line no-param-reassign -- YOLO
         c[0].plugins = { ...c[0].plugins, ...plugins }
 
         c.push(restConfig)

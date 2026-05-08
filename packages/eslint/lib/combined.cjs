@@ -35,6 +35,7 @@ const combined = [
     else if (idx > 0) {
         const { plugins, ...restConfig } = e
 
+        // eslint-disable-next-line no-param-reassign -- YOLO
         c[0].plugins = { ...c[0].plugins, ...plugins }
 
         c.push(restConfig)
