@@ -1,4 +1,4 @@
-/* eslint-disable eqeqeq, no-console, no-param-reassign -- YOLO LMAO */
+/* eslint-disable no-param-reassign -- YOLO LMAO */
 import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
@@ -56,7 +56,7 @@ async function generateOutputFiles(outputFileType: string): Promise<void> {
 
     const config: SuspendedConfig = coerceEslintMetaData(
         configImport.default[0]
-    ) as SuspendedConfig
+    )
 
     generateHydratorFiles(outputFileType, config)
 }
@@ -109,8 +109,8 @@ function generateHydratorFile(
         generateCJS ? `require('./lib.cjs')` : `import './lib.mjs'`,
         '',
         generateCJS
-            ? `const { hydrateConfigData } = require('./hydrator.cjs')`
-            : `import { hydrateConfigData } from './hydrator.mjs'`,
+            ? `const { hydrateConfigData, wrapImport } = require('./hydrator.cjs')`
+            : `import { hydrateConfigData, wrapImport } from './hydrator.mjs'`,
         '',
         ...imports.map(($import) => {
             const importParts = getMappedImportSource($import).split('!')
@@ -131,7 +131,7 @@ function generateHydratorFile(
             'const hydrationDict = {',
             importDict
                 .entries()
-                .map(([k, v]) => `'${k}': ${v}`)
+                .map(([k, v]) => `'${k}': wrapImport(${v})`)
                 .toArray()
                 .join(', '),
             '}'
@@ -237,7 +237,7 @@ function generateImportReceiver(
     normalizedImportName: string,
     namedImport?: string
 ): string {
-    // eslint-disable-next-line no-negated-condition -- LMAO
+     
     return namedImport != null
         ? `{ ${namedImport}${generateCJS ? ':' : ' as '} ${normalizedImportName} }`
         : normalizedImportName

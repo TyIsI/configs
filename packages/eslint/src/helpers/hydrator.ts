@@ -1,6 +1,13 @@
-/* eslint-disable @typescript-eslint/prefer-destructuring, eqeqeq, no-param-reassign -- LMAO */
+/* eslint-disable @typescript-eslint/prefer-destructuring, no-param-reassign -- YOLO */
 
-import plugin from 'eslint-plugin-n'
+export function wrapImport(i: object): object {
+    return '__esModule' in i &&
+        'default' in i &&
+        i.__esModule != null &&
+        i.default != null
+        ? i.default
+        : i
+}
 
 export const hydrateConfigData = (
     hydrationDict: Record<string, object>,
@@ -18,15 +25,15 @@ export const hydrateConfigData = (
         if (v != null && typeof v === 'object' && !Array.isArray(v)) {
             if (hydrationKeys.includes(localPathString)) {
                 // @ts-expect-error -- all as planned
-                c[k] = hydrationDict[localPathString]
+                c[k] = wrapImport(hydrationDict[localPathString])
             } else {
                 // @ts-expect-error -- all as planned
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- LMAO
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- YOLO
                 c[k] = hydrateConfigData(hydrationDict, v, localPath)
             }
         } else {
             // @ts-expect-error -- all as planned
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- LMAO
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- YOLO
             c[k] = v
         }
 
