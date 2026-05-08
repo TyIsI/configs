@@ -10,11 +10,10 @@ import type {
     FilteredConfigType,
     FilteredOutput,
     ImportResolverSettings,
-    OneOf,
-    RuleType
+    OneOf
 } from './types.js'
 
-import { fileGlobs, type FileTypes, ValidRuleTypes } from './constants.js'
+import { fileGlobs, type FileTypes } from './constants.js'
 import { getObjectKeys } from './utils.js'
 
 export const generateFlatConfig = (

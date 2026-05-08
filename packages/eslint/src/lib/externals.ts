@@ -6,8 +6,9 @@ import jsxA11y from 'eslint-plugin-jsx-a11y'
 import eslintPluginReact from 'eslint-plugin-react'
 import globals from 'globals'
 
-import type { ConfigType } from './types.js'
 import type { TSESLint } from '@typescript-eslint/utils'
+
+import type { ConfigType } from './types.js'
 
 import { baseExcludeRules } from './constants.js'
 import { withFilteredConfigProp } from './functions.js'
