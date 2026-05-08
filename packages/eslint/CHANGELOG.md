@@ -1,5 +1,11 @@
 # @tyisi/config-eslint
 
+## 7.0.0
+
+### Major Changes
+
+- 48e60f0: improved hydration for cjs/esm inter-compatibility
+
 ## 6.0.0
 
 ### Major Changes
