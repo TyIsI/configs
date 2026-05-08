@@ -167,7 +167,8 @@
     "license": "ISC",
     "main": "./dist/all.mjs",
     "publishConfig": {
-        "access": "public"
+        "access": "public",
+        "provenance": true
     },
     "repository": "TyIsI/configs",
     "scripts": {
