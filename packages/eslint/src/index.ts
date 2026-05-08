@@ -1,6 +1,5 @@
 import cjs from './configs/cjs.js'
 import cjsx from './configs/cjsx.js'
-import combined from './configs/combined.js'
 import cts from './configs/cts.js'
 import ctsx from './configs/ctsx.js'
 import js from './configs/js.js'
@@ -15,7 +14,6 @@ import tsx from './configs/tsx.js'
 export const configs = {
     cjs,
     cjsx,
-    combined,
     cts,
     ctsx,
     js,
@@ -28,4 +26,4 @@ export const configs = {
     tsx
 }
 
-export default combined
+export default configs
